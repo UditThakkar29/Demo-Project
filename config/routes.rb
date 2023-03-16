@@ -3,9 +3,10 @@ Rails.application.routes.draw do
   get 'home/index'
 
   devise_for :users, controllers: {
-    sessions: 'users/sessions'
-    
+    registration: 'users/registrations'
   }
+
+  get '/confirm', to: "users/registrations#after_signup"
 
   get 'main/show', to: "main#show"
   get 'home/index', to: "home#index"

@@ -1,6 +1,59 @@
-<h1>Main View</h1>
+
+<style>
+  body{
+  background-color: #091e42;
+  color: white;
+
+}
+.heading{
+  // color: white;
+  text-align: center;
+
+}
+
+.custom{
+  display: flex;
+  flex-wrap: initial;
+}
+
+.text{
+  padding: 50px;
+}
+
+.login-card{
+  padding-top: 45px;
+}
 
 
-<% if user_signed_in? %>
-  <%= link_to "All Projects", home_index_path, class: "btn btn-primary"%>
-<% end %>
+</style>
+
+
+<h1 class= "heading mb-5">New Home page</h1>
+
+<div class="container">
+  <div class="row custom">
+    <div class="col-lg-6 ms-4 text">
+      <div>
+        <p class="h1">The #1 software development tool for managing your projects </p>
+        <p ><strong>Our app include following things :</strong></p>
+        <ul style="list-style-type:none;">
+          <li>Create multiple projects</li>
+          <li>Create multiple boards</li>
+          <li>Create multiple projects</li>
+          <li>Create multiple tasks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-6 ms-5 login-card">
+      <div class="card" style="width: 25rem; height: 20rem;">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+          <a href="#" class="card-link">Card link</a>
+          <a href="#" class="card-link">Another link</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
