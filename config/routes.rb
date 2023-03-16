@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   get 'home/index'
 
   devise_for :users, controllers: {
-    registration: 'users/registrations'
+    registration: 'users/registrations',
+    session: 'users/session'
   }
 
   get '/confirm', to: "users/registrations#after_signup"

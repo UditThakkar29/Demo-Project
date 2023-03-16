@@ -51,11 +51,11 @@
     <div class="col-lg-6 ms-5 login-card">
       <div class="card" style="width: 25rem; height: 20rem;">
         <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-          <a href="#" class="card-link">Card link</a>
-          <a href="#" class="card-link">Another link</a>
+          <h5 class="card-title">Get Started</h5>
+          <h6 class="card-subtitle mb-2 text-muted">Create your account</h6>
+          <p class="card-text">Sign In if you already have a account or just create one!</p>
+          <%= link_to "Sign Up", new_user_registration_path,class: "btn btn-primary" %>
+          <%= link_to "Sign In", user_session_path,class: "btn btn-primary" %>
         </div>
       </div>
     </div>
