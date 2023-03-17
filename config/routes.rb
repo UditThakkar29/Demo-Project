@@ -2,12 +2,14 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'home/index'
 
+
   devise_for :users, controllers: {
-    registration: 'users/registrations',
+    registrations: 'registrations',
     session: 'users/session'
   }
+  get 'confirmation_pending' => 'main#after_registration_path'
 
-  get '/confirm', to: "users/registrations#after_signup"
+  # get '/confirm', to: "users/registrations#after_signup"
 
   get 'main/show', to: "main#show"
   get 'home/index', to: "home#index"

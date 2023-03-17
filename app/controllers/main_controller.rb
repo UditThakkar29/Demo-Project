@@ -5,4 +5,14 @@ class MainController < ApplicationController
 
   def show
   end
+
+  def after_registration_path
+    puts "######################################"
+    puts "######################################"
+    puts "######################################"
+    puts "main controller"
+    puts "######################################"
+    puts "######################################"
+    confirmation_pending_path
+  end
 end
