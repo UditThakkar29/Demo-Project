@@ -61,10 +61,17 @@
         <div class="card-body">
           <h5 class="card-title text-center mb-3 fs-2">Get Started</h5>
           <h6 class="card-subtitle mb-2 text-muted fs-5">Welcome to Jeera. We’re so glad you’ve chosen to join us in changing the game of project management and team collaboration.</h6>
-          <p class="card-text">To get started create your account by clicking on the Sign Up button</p>
-          <%= link_to "Sign Up", new_user_registration_path,class: "btn btn-primary mb-3" %>
-          <p class="card-text">If you returning back Sign In</p>
-          <%= link_to "Sign In", user_session_path,class: "btn btn-primary" %>
+
+          <% if user_signed_in? %>
+            <%= link_to "Dashboard", home_index_path,class: "btn btn-primary mb-3" %>
+            <br>
+            <%= link_to "Log Out", destroy_user_session_path,class: "btn btn-danger mb-3" %>
+          <% else %>
+            <p class="card-text">To get started create your account by clicking on the Sign Up button</p>
+            <%= link_to "Sign Up", new_user_registration_path,class: "btn btn-primary mb-3" %>
+            <p class="card-text">If you returning back Sign In</p>
+            <%= link_to "Sign In", user_session_path,class: "btn btn-primary" %>
+          <% end %>
         </div>
       </div>
     </div>

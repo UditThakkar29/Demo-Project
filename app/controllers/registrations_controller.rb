@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  layout "home.html.erb"
+  # layout "home.html.erb"
 
   # def new
   #   super
@@ -15,9 +15,6 @@ class RegistrationsController < Devise::RegistrationsController
       "/confirmation_pending"
   end
 
-  private
-  def after_sign_up_path_for(resource)
-    home_index_path
-  end
+
 
 end
