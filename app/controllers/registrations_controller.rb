@@ -15,4 +15,9 @@ class RegistrationsController < Devise::RegistrationsController
       "/confirmation_pending"
   end
 
+  private
+  def after_sign_up_path_for(resource)
+    home_index_path
+  end
+
 end

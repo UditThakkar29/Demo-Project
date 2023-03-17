@@ -5,7 +5,6 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: {
     registrations: 'registrations',
-    session: 'users/session'
   }
   get 'confirmation_pending' => 'main#after_registration_path'
 
