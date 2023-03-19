@@ -1,0 +1,10 @@
+<h1>All projects</h1>
+
+
+<% @projects.each do |project| %>
+  <h3><%= project.name %></h3><br>
+  <p><%= project.description %></p><br>
+  <p><%= project.user.email %></p><br>
+  <hr>
+
+<% end %>
