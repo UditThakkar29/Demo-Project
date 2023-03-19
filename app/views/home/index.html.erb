@@ -2,5 +2,8 @@
 
 
 <% if user_signed_in? %>
-  <%= link_to "All Projects", home_project_path, class: "btn btn-primary"%>
+  <%= link_to "All Projects", projects_path, class: "btn btn-primary"%>
+  <% if current_user.has_role?(:manager) %>
+    <%= link_to "Create Project", new_project_path, class: "btn btn-primary"%>
+  <% end %>
 <% end %>

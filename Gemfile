@@ -58,3 +58,4 @@ gem "devise"
 gem "letter_opener"
 gem "awesome_print"
 gem "rolify"
+gem 'cancancan'
