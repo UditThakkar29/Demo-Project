@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
 
   def index
-    @projects = Project.all 
+    @projects = current_user.projects
   end
 
   def show
@@ -21,6 +21,13 @@ class ProjectsController < ApplicationController
       render :new
     end
   end
+
+  def destroy
+    @project = Project.find(params[:id])
+    @project.destroy
+    redirect_to projects_path
+  end
+
   private
 
   def project_params

@@ -11,7 +11,9 @@ Rails.application.routes.draw do
 
   # get '/confirm', to: "users/registrations#after_signup"
 
+  # resources :users do
   resources :projects
+  # end
 
   get 'main/show', to: "main#show"
   get 'home/index', to: "home#index"
