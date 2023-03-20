@@ -1,0 +1,10 @@
+<%= form_with(model: @project, url: project_path(@project)) do |form| %>
+<%#= form_with model: @project do |form| %>
+  <%= form.label :name %><br>
+  <%= form.text_field :name %><br>
+
+  <%= form.label :description %><br>
+  <%= form.text_area :description %><br>
+
+  <%= form.submit "Edit Project" %>
+<% end %>
