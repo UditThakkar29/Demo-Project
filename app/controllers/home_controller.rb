@@ -4,10 +4,6 @@ class HomeController < ApplicationController
   def index
   end
 
-  def project
-
-  end
-
   def after_sign_up_path_for(resource)
     home_index_path
   end

@@ -1,17 +1,34 @@
-<h1><%= @project.name %></h1>
+<div class="d-flex">
+  <div>
+  <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-4">
+          <%= link_to "Current Project", project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+            </i><span>#</span>
+          </a>
+          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+            <span>#</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
 
-<p><%= @project.description %></p>
+  <div>
+    <h1><%= @project.name %></h1>
 
-<p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to 'Back', projects_path %></p>
+    <p><%= @project.description %></p>
+    <p><%= link_to 'Edit', edit_project_path(@project) %> | <%= link_to 'Back', projects_path %></p>
+    <p><%= link_to 'Delete', project_path(@project), method: :delete %>
 
-<p><%= link_to 'Delete', project_path(@project), method: :delete %>
+    <% @project.users.each do |user| %>
+      <% if user.has_role? (:manager) %>
+        <p><%= @project.users.first["email"] %></p><br>
+      <% end %>
+    <% end %>
 
-<% @project.users.each do |user| %>
-  <% if user.has_role? (:manager) %>
-    <p><%= @project.users.first["email"] %></p><br>
-  <% end %>
-<% end %>
-
-<%= link_to "All Projects", projects_path, class: "btn btn-primary"%>
-
-
+    <%= link_to "All Projects", projects_path, class: "btn btn-primary"%>
+  </div>
+</div>

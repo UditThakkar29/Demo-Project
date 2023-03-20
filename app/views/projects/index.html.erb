@@ -1,24 +1,26 @@
-<h1>All projects</h1>
+<div class="container">
+  <h1>All projects</h1>
 
-<div class="d-flex">
-  <% @projects.each do |project| %>
-    <div class="card mx-2 mb-2" style="width: 18rem;">
-      <div class="card-body">
-        <h5 class="card-title"><%= project.name %></h5>
-        <%# <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> %>
-        <p class="card-text"><%= project.description %></p>
-        <% project.users.each do |user| %>
-          <% if user.has_role? (:manager) %>
-            <h6> Manager of the project is</h6>
-            <p><%= user.email %></p><br>
+  <div class="d-flex">
+    <% @projects.each do |project| %>
+      <div class="card mx-2 mb-2" style="width: 18rem;">
+        <div class="card-body">
+          <h5 class="card-title"><%= project.name %></h5>
+          <%# <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6> %>
+          <p class="card-text"><%= project.description %></p>
+          <% project.users.each do |user| %>
+            <% if user.has_role? (:manager) %>
+              <h6> Manager of the project is</h6>
+              <p><%= user.email %></p><br>
+            <% end %>
           <% end %>
-        <% end %>
-        <%= link_to "Show", project_path(project),class: "btn btn-primary" %>
+          <%= link_to "Show", project_path(project),class: "align-self-end btn btn-primary mt-4", style: "position: absolute; bottom: 10px;" %>
+        </div>
       </div>
-    </div>
+    <% end %>
+  </div>
+
+  <% if current_user.has_role? (:manager) %>
+    <%= link_to "Create Project", new_project_path, class: "btn btn-outline-primary" %>
   <% end %>
 </div>
-
-<% if current_user.has_role? (:manager) %>
-  <%= link_to "Create Project", new_project_path, class: "btn btn-outline-primary" %>
-<% end %>

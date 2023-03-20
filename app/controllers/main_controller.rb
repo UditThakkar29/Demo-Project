@@ -1,6 +1,6 @@
 class MainController < ApplicationController
   def index
-    render layout: "home.html.erb"
+    render layout: "home"
   end
 
   def show
