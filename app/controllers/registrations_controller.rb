@@ -1,5 +1,5 @@
 class RegistrationsController < Devise::RegistrationsController
-  # layout "home.html.erb"
+  layout "home.html.erb"
 
   # def new
   #   super
