@@ -11,7 +11,7 @@ class Project < ApplicationRecord
   # has_one :manager, -> { where(:roles => {name: :manager}) }, through: :roles, class_name: 'User', source: :users
   # private
   def create_board
-    Project.last.build_board(name: "dommy")
+    Project.last.build_board(name: "dommy").save
   end
 
 end

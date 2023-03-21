@@ -1,0 +1,18 @@
+<div style="width: 80%;">
+  <div class="container">
+    <div class="row", style="align-items: flex-end; border-bottom: 1px solid #D3D3D3;">
+      <div class="col">
+        <h2><%= @project.name %></h2>
+      </div>
+      <div class="col">
+        <p><%= @project.description %></p>
+      </div>
+      <div class="col">
+        <p><%= link_to 'Edit', edit_project_path(@project) %></p>
+      </div>
+      <div class="col">
+        <p><%= link_to 'Delete', project_path(@project), method: :delete %>
+      </div>
+    </div>
+  </div>
+</div>
