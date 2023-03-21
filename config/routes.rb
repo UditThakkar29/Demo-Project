@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  # get 'boards/index'
   root 'main#index'
   get 'dashboard/index'
 
@@ -12,7 +13,9 @@ Rails.application.routes.draw do
   # get '/confirm', to: "users/registrations#after_signup"
 
   # resources :users do
-  resources :projects
+  resources :projects do
+    resources :boards
+  end
   # end
 
   get 'main/show', to: "main#show"
