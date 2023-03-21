@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   root 'main#index'
-  get 'home/index'
+  get 'dashboard/index'
 
 
   devise_for :users, controllers: {
@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   # end
 
   get 'main/show', to: "main#show"
-  get 'home/index', to: "home#index"
-  get 'home/project', to: "home#project"
+  get 'dashboard/index', to: "dashboard#index"
+  get 'dashboard/project', to: "dashboard#project"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

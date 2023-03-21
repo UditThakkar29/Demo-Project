@@ -3,9 +3,6 @@ class MainController < ApplicationController
     render layout: "home"
   end
 
-  def show
-  end
-
   def after_registration_path
     puts "######################################"
     puts "######################################"

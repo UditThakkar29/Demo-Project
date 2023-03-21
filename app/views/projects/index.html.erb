@@ -2,7 +2,7 @@
   <h1>All projects</h1>
 
   <div class="d-flex">
-    <% @projects.each do |project| %>
+    <% current_user.projects.each do |project| %>
       <div class="card mx-2 mb-2" style="width: 18rem;">
         <div class="card-body">
           <h5 class="card-title"><%= project.name %></h5>

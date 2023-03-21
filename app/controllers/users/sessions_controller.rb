@@ -25,6 +25,6 @@ class Users::SessionsController < Devise::SessionsController
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
   def after_sign_up_path_for(resource)
-    home_index_path
+    dashboard_index_path
   end
 end

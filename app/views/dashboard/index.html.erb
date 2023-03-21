@@ -1,6 +1,5 @@
 <h1>Projects</h1>
 
-
 <% if user_signed_in? %>
   <%= link_to "All Projects", projects_path, class: "btn btn-primary"%>
   <% if current_user.has_role?(:manager) %>
