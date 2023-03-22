@@ -6,12 +6,15 @@ class Project < ApplicationRecord
   validates :description, presence: true
 
   after_create :create_board
+  # before_destroy :delete_board
 
-  # has_many :users, -> { distinct }, through: :roles, class_name: 'User', source: :users
-  # has_one :manager, -> { where(:roles => {name: :manager}) }, through: :roles, class_name: 'User', source: :users
   private
   def create_board
     Project.last.build_board(name: "#{Project.last.name}-Board").save
   end
+
+  # def delete_board
+  #   Project.last.board.destroy
+  # end
 
 end

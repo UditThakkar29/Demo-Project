@@ -12,13 +12,13 @@ Rails.application.routes.draw do
   get 'confirmation_pending' => 'main#after_registration_path'
 
   # get '/confirm', to: "users/registrations#after_signup"
-  get '/projects/:project_id/boards/:id', to: "boards#index"
   # resources :users do
   resources :projects do
-    resources :boards, only: [:index] do
+    resources :boards do
       resources :sprints
     end
   end
+  get '/projects/:project_id/boards/:id', to: "boards#index"
   # end
 
   get 'main/show', to: "main#show"
