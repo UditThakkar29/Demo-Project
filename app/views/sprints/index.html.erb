@@ -4,9 +4,9 @@
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-2">
-          <%= link_to "Current Project", project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
-          <%= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
-          <%= link_to "All Sprints", project_board_sprints_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%= link_to "Back to Board", project_board_path(id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All Sprints", project_board_sprints_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
           <%= link_to "Create Sprint", new_project_board_sprint_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
           <a href="" class="list-group-item list-group-item-action py-2 ripple">
             <span>#</span>

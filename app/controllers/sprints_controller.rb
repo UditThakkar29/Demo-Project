@@ -1,8 +1,10 @@
-class BoardsController < ApplicationController
-  before_action :authenticate_user!
-
+class SprintsController < ApplicationController
   def index
     @project = Project.find(params[:project_id])
     @board = @project.board
+  end
+
+  def new
+    
   end
 end

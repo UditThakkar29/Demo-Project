@@ -9,9 +9,9 @@ class Project < ApplicationRecord
 
   # has_many :users, -> { distinct }, through: :roles, class_name: 'User', source: :users
   # has_one :manager, -> { where(:roles => {name: :manager}) }, through: :roles, class_name: 'User', source: :users
-  # private
+  private
   def create_board
-    Project.last.build_board(name: "dommy").save
+    Project.last.build_board(name: "#{Project.last.name}-Board").save
   end
 
 end

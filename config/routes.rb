@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'sprints/index'
   # get 'boards/index'
   root 'main#index'
   get 'dashboard/index'
@@ -11,10 +12,12 @@ Rails.application.routes.draw do
   get 'confirmation_pending' => 'main#after_registration_path'
 
   # get '/confirm', to: "users/registrations#after_signup"
-
+  get '/projects/:project_id/boards/:id', to: "boards#index"
   # resources :users do
   resources :projects do
-    resources :boards
+    resources :boards, only: [:index] do
+      resources :sprints
+    end
   end
   # end
 
