@@ -1,7 +1,14 @@
 class SprintsController < ApplicationController
-  def index
+  # def index
+  #   @project = Project.find(params[:project_id])
+  #   @board = @project.board
+  #   @sprints = Sprint.all
+  # end
+
+  def show
     @project = Project.find(params[:project_id])
     @board = @project.board
+    @sprint = Sprint.find(params[:id])
   end
 
   def new

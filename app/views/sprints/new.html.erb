@@ -1,6 +1,7 @@
 <div class="d-flex">
   <div>
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <h3 class="text-center"><%= @project.name%></h3>
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-2">
           <%= link_to "Back to Board", project_boards_path(id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
@@ -15,6 +16,10 @@
     </nav>
   </div>
 
-  <%= render "new"%>
+  <div style="width: 80%;">
+    <div class="row",style="align-items: flex-end;">
+      <%= render "form" %>
+    </div>
+  </div>
 
 </div>

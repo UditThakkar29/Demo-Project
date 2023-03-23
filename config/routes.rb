@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  get 'sprints/index'
+  # get 'sprints/index'
   # get 'boards/index'
   root 'main#index'
   get 'dashboard/index'

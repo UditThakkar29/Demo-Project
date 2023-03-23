@@ -1,69 +1,12 @@
-<%# <section class="vh-70 gradient-custom">
-  <div class="container py-5 h-70">
-    <div class="row justify-content-center align-items-center h-100">
-      <div class="col-12 col-lg-9 col-xl-7">
-        <div class="card shadow-2-strong card-registration" style="border-radius: 15px;">
-          <div class="card-body p-4 p-md-5">
-            <h3 class="mb-2">Create Sprint</h3>
-            <form>
-              <div class="row">
-                <div class="col-md-12 mb-4">
-
-                  <div class="form-outline"> %>
-                    <%# <input type="text" id="firstName" class="form-control form-control-lg" />
-                    <label class="form-label" for="firstName">Sprint Name</label> %>
-                  <%# </div>
-
-                </div>
-
-              </div>
-
-              <div class="row">
-                <div class="col-md-12 mb-4 d-flex align-items-center">
-                  <div class="form-outline datepicker w-100"> %>
-                    <%# <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                    <label for="birthdayDate" class="form-label">Birthday</label> %>
-                  <%# </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-md-12 mb-4 d-flex align-items-center">
-                  <div class="form-outline datepicker w-100"> %>
-                    <%# <input type="text" class="form-control form-control-lg" id="birthdayDate" />
-                    <label for="birthdayDate" class="form-label">Birthday</label> %>
-                  <%# </div>
-                </div>
-              </div>
-
-              <div class="row">
-                <div class="col-md-12 mb-4 pb-2">
-
-                  <div class="form-outline"> %>
-                    <%# <input type="email" id="emailAddress" class="form-control form-control-lg" />
-                    <label class="form-label" for="emailAddress">Email</label> %>
-                  <%# </div>
-                </div>
-              </div>
-
-              <div class="mt-4 pt-2">
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section> %>
-
-            <%= form_with model: @sprint, url: project_board_sprints_path do |form| %>
-                    <%= form.label :name%>
-                    <%= form.text_field :name, class:"form-control form-control-lg"%>
-                    <%= form.label :start_time %>
-                    <%= form.date_field :start_time, class:"form-control form-control-lg"%>
-                    <%= form.label :goal %>
-                    <%= form.text_field :goal, class:"form-control form-control-lg"%>
-                    <%= form.label :duration %>
-                    <%= form.number_field :duration, class:"form-control form-control-lg" %>
-                <%= form.submit "Create Sprint",class: "btn btn-primary btn-lg" %>
-            <% end %>
+<%= form_with model: @sprint, url: project_board_sprints_path do |form| %>
+  <%= form.label :name%>
+  <%= form.text_field :name, class:"form-control form-control-lg"%>
+  <%= form.label :start_time %>
+  <%= form.date_field :start_time, class:"form-control form-control-lg"%>
+  <%= form.label :goal %>
+  <%= form.text_field :goal, class:"form-control form-control-lg"%>
+  <%= form.label :duration %>
+  <%= form.number_field :duration, class:"form-control form-control-lg" %>
+  <%= form.submit "Create Sprint",class: "btn btn-primary btn-lg" %>
+<% end %>
 
