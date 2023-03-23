@@ -5,10 +5,15 @@ Rails.application.routes.draw do
   get 'dashboard/index'
 
 
+  # get '/users', to: 'devise/registrations#new'
   devise_for :users, controllers: {
     registrations: 'registrations',
     sessions: 'users/sessions'
   }
+  # devise_scope :user do
+  #   get '/users', to: 'devise/registrations#new'
+  #   get '/users/password', to: 'devise/passwords#new'
+  # end
   get 'confirmation_pending' => 'main#after_registration_path'
 
   # get '/confirm', to: "users/registrations#after_signup"
