@@ -1,0 +1,30 @@
+<div class="d-flex">
+  <%= render "navbar" %>
+
+  <div class="ms-5 mt-2" style="width: 80%;">
+    <h2 ><%= @ticket.name %> </h2>
+    <p style="strong"><%= @ticket.summary %></p>
+    <% if @ticket.priority== "High"%>
+      <p class="text-danger"> <strong style="color: black;">Priority </strong>: High</p>
+    <% elsif @ticket.priority== "Medium" %>
+      <p class="text-warning-emphasis"><strong style="color: black;">Priority </strong>: Medium</p>
+    <% else %>
+    <p class="text-primary"><strong style="color: black;">Priority </strong>: Low</p>
+    <% end %>
+    <h3>Change Status<h3>
+    <% if @ticket.to_do? %>
+      <%= link_to "In Progress", doing_project_board_sprint_ticket_path(@ticket), class:"btn btn-primary " %>
+    <% elsif @ticket.progress? %>
+      <%= link_to "QA", testing_project_board_sprint_ticket_path(@ticket), class:"btn btn-primary " %>
+    <% elsif @ticket.QA? %>
+      <%= link_to "QA", done_project_board_sprint_ticket_path(@ticket), class:"btn btn-primary " %>
+    <% else %>
+      <h5>All done for this ticket</h5>
+    <% end %>
+  </div>
+
+</div>
+
+
+
+

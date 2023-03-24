@@ -59,3 +59,4 @@ gem "letter_opener"
 gem "awesome_print"
 gem "rolify"
 gem 'cancancan'
+gem 'aasm', '~> 4.12'

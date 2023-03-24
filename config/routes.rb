@@ -20,9 +20,18 @@ Rails.application.routes.draw do
   # resources :users do
   resources :projects do
     resources :boards do
-      resources :sprints
+      resources :sprints do
+        resources :tickets do
+          member do
+            patch :doing
+            patch :testing
+            patch :done
+          end
+        end
+      end
     end
   end
+
   get '/projects/:project_id/boards/:id', to: "boards#index"
   # end
 
