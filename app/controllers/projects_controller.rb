@@ -5,7 +5,21 @@ class ProjectsController < ApplicationController
   end
 
   def show
-    @project = Project.find(params[:id])
+    puts "////////////////////////"
+    @project = current_user.projects.find(params[:id])
+    # @project = Project.find(params[:id])
+
+    # users = project.users
+    # users.each do |user|
+    #   if current_user.id == user.id
+    #     puts "////////////////////////"
+    #     puts current_user.id
+    #     puts "////////////////////////"
+    #     @project = project
+    #   end
+    # end
+
+
   end
 
   def new

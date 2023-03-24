@@ -3,7 +3,9 @@
 
   <div class="ms-5 mt-2" style="width: 80%;">
     <h2 ><%= @ticket.name %> </h2>
+
     <p style="strong"><%= @ticket.summary %></p>
+
     <% if @ticket.priority== "High"%>
       <p class="text-danger"> <strong style="color: black;">Priority </strong>: High</p>
     <% elsif @ticket.priority== "Medium" %>
@@ -11,16 +13,23 @@
     <% else %>
     <p class="text-primary"><strong style="color: black;">Priority </strong>: Low</p>
     <% end %>
-    <h3>Change Status<h3>
+
+    <h3>Change Status</h3>
     <% if @ticket.to_do? %>
-      <%= link_to "In Progress", doing_project_board_sprint_ticket_path(@ticket), class:"btn btn-primary " %>
+      <p>To-Do</p>
+      <%= link_to "In Progress", doing_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
     <% elsif @ticket.progress? %>
-      <%= link_to "QA", testing_project_board_sprint_ticket_path(@ticket), class:"btn btn-primary " %>
+      <p>In Progress</p>
+      <%= link_to "QA", testing_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
     <% elsif @ticket.QA? %>
-      <%= link_to "QA", done_project_board_sprint_ticket_path(@ticket), class:"btn btn-primary " %>
+      <p>QA</p>
+      <%= link_to "Back in production", doing_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+      <%= link_to "Done", done_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
     <% else %>
       <h5>All done for this ticket</h5>
     <% end %>
+
+    <h4>Assign Task to any user</h4>
   </div>
 
 </div>

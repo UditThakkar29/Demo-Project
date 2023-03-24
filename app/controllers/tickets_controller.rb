@@ -23,6 +23,27 @@ class TicketsController < ApplicationController
     end
   end
 
+  def doing
+    @ticket = Ticket.find(params[:id])
+    @sprint = Sprint.find(params[:sprint_id])
+    @ticket.doing!
+    redirect_to project_board_sprint_path(id:@sprint)
+  end
+
+  def testing
+    @ticket = Ticket.find(params[:id])
+    @sprint = Sprint.find(params[:sprint_id])
+    @ticket.testing!
+    redirect_to project_board_sprint_path(id:@sprint)
+  end
+
+  def done
+    @ticket = Ticket.find(params[:id])
+    @sprint = Sprint.find(params[:sprint_id])
+    @ticket.done!
+    redirect_to project_board_sprint_path(id:@sprint)
+  end
+
 
   private
   def ticket_params
