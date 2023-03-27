@@ -1,6 +1,8 @@
 class Ticket < ApplicationRecord
 
   include AASM
+  has_many :sprint_tickets, dependent: :destroy
+  has_many :sprints, through: :sprint_tickets
 
   aasm column: 'status', :whiny_transitions => false do
     state :to_do, initial: true
@@ -22,8 +24,6 @@ class Ticket < ApplicationRecord
 
   end
 
-  has_many :sprint_tickets, dependent: :destroy
-  has_many :sprints, through: :sprint_tickets
 
   def log_status_change
     puts "changing from #{aasm.from_state} to #{aasm.to_state}"
