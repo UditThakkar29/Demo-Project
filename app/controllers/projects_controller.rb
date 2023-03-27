@@ -1,25 +1,11 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_by_slug, only: [:show,:edit,:update,:destroy]
   def index
     @projects = Project.all
   end
 
   def show
-    puts "////////////////////////"
-    @project = current_user.projects.find(params[:id])
-    # @project = Project.find(params[:id])
-
-    # users = project.users
-    # users.each do |user|
-    #   if current_user.id == user.id
-    #     puts "////////////////////////"
-    #     puts current_user.id
-    #     puts "////////////////////////"
-    #     @project = project
-    #   end
-    # end
-
-
   end
 
   def new
@@ -37,25 +23,34 @@ class ProjectsController < ApplicationController
   end
 
   def edit
-    @project = Project.find(params[:id])
   end
 
   def update
-    @project = Project.find(params[:id])
-    if @project.update(project_params)
+    @project_test = Project.new(project_params)
+    if @project_test.valid?
+      @project.slug = nil if @project.name != params[:name]
+      @project.update(project_params)
       redirect_to @project
     else
       render :edit, status: :unprocessable_entity
     end
+    # if @project.update(project_params)
+    #   redirect_to @project
+    # else
+    #   render :edit, status: :unprocessable_entity
+    # end
   end
 
   def destroy
-    @project = Project.find(params[:id])
     @project.destroy
     redirect_to projects_path
   end
 
   private
+
+  def find_by_slug
+    @project = current_user.projects.friendly.find_by_slug(params[:slug])
+  end
 
   def project_params
     params.require(:project).permit(:name, :description)

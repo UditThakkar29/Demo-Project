@@ -18,9 +18,9 @@ Rails.application.routes.draw do
 
   # get '/confirm', to: "users/registrations#after_signup"
   # resources :users do
-  resources :projects do
-    resources :boards do
-      resources :sprints do
+  resources :projects, param: :slug do
+    resources :boards, param: :slug do
+      resources :sprints, param: :slug do
         resources :tickets do
           member do
             patch :doing
