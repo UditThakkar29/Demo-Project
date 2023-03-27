@@ -19,7 +19,7 @@
             </div>
             <ul class="postcard__tagbox">
               <li class="tag__item play blue">
-                <%= link_to "Show Sprint", project_board_sprint_path(id: sprint,board_id: sprint.board_id)%>
+                <%= link_to "Show Sprint", project_board_sprint_path(slug: sprint,board_slug: @board)%>
 					    </li>
             </ul>
           </div>

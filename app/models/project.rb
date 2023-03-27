@@ -1,5 +1,8 @@
 class Project < ApplicationRecord
   # belongs_to :user
+  extend FriendlyId
+  friendly_id :name, use: :slugged
+
   has_and_belongs_to_many :users
   has_one :board, dependent: :destroy
   validates :name, presence: true, uniqueness: true

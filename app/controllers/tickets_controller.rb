@@ -1,51 +1,55 @@
 class TicketsController < ApplicationController
 
+  before_action :get_by_slug, only: [:show, :new, :create]
+  before_action :get_by_slug_aasm, only: [:doing, :testing, :done]
+
   def show
     @ticket = Ticket.find(params[:id])
-    @sprint = @ticket.sprints.last
-    @project = Project.find(params[:project_id])
   end
 
   def new
     @ticket = Ticket.new
-    @project = Project.find(params[:project_id])
-    @sprint = Sprint.find(params[:sprint_id])
   end
 
   def create
     @ticket = Ticket.create(ticket_params)
-    @sprint = Sprint.find(params[:sprint_id])
+    # @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
     if @ticket.save
       @ticket.sprint_tickets.create(sprint: @sprint)
-      redirect_to project_board_sprint_path(id:@sprint)
+      redirect_to project_board_sprint_path(slug:@sprint)
     else
       render :new
     end
   end
 
   def doing
-    @ticket = Ticket.find(params[:id])
-    @sprint = Sprint.find(params[:sprint_id])
     @ticket.doing!
-    redirect_to project_board_sprint_path(id:@sprint)
+    redirect_to project_board_sprint_path(slug:@sprint)
   end
 
   def testing
-    @ticket = Ticket.find(params[:id])
-    @sprint = Sprint.find(params[:sprint_id])
     @ticket.testing!
-    redirect_to project_board_sprint_path(id:@sprint)
+    redirect_to project_board_sprint_path(slug:@sprint)
   end
 
   def done
-    @ticket = Ticket.find(params[:id])
-    @sprint = Sprint.find(params[:sprint_id])
     @ticket.done!
-    redirect_to project_board_sprint_path(id:@sprint)
+    redirect_to project_board_sprint_path(slug:@sprint)
   end
 
 
   private
+
+  def get_by_slug
+    @project = Project.friendly.find_by_slug(params[:project_slug])
+    @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
+  end
+
+  def get_by_slug_aasm
+    @ticket = Ticket.find(params[:id])
+    @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
+  end
+
   def ticket_params
     params.require(:ticket).permit(:name,:summary,:priority,:status,:reporter_id)
   end
