@@ -3,10 +3,22 @@
 class Users::SessionsController < Devise::SessionsController
   # before_action :configure_sign_in_params, only: [:create]
 
+  def new
+    @project = Project.friendly.find_by_slug(params[:slug]) if params[:slug]
+    super
+  end
   # GET /resource/sign_in
   # def new
   #   super
   # end
+
+  def create
+    project = Project.friendly.find_by_slug(params[:user][:slug])
+    if project
+      project.users << current_user if project
+    end
+    super
+  end
 
   # POST /resource/sign_in
   # def create

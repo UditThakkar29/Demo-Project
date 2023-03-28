@@ -50,6 +50,9 @@ class ProjectsController < ApplicationController
 
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:slug])
+    if @project==nil
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def project_params

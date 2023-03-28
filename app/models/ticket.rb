@@ -7,19 +7,19 @@ class Ticket < ApplicationRecord
   aasm column: 'status', :whiny_transitions => false do
     state :to_do, initial: true
     state :progress
-    state :QA
+    state :qa
     state :done
 
     after_all_transitions :log_status_change
 
     event :doing do
-      transitions from: [:to_do, :QA], to: :progress
+      transitions from: [:to_do, :qa], to: :progress
     end
     event :testing do
-      transitions from: [:progress], to: :QA
+      transitions from: [:progress], to: :qa
     end
     event :done do
-      transitions from: [:QA], to: :done
+      transitions from: [:qa], to: :done
     end
 
   end

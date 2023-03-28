@@ -21,9 +21,9 @@
     <% elsif @ticket.progress? %>
       <p>In Progress</p>
       <%= link_to "QA", testing_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
-    <% elsif @ticket.QA? %>
+    <% elsif @ticket.qa? %>
       <p>QA</p>
-      <%= link_to "Back in production", doing_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+      <%= link_to "Back in progress", doing_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
       <%= link_to "Done", done_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
     <% else %>
       <h5>All done for this ticket</h5>

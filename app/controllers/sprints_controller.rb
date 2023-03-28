@@ -9,6 +9,9 @@ class SprintsController < ApplicationController
 
   def show
     @sprint = Sprint.friendly.find_by_slug(params[:slug])
+    if @sprint==nil
+      raise ActiveRecord::RecordNotFound
+    end
   end
 
   def new
