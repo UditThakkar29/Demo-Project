@@ -14,5 +14,8 @@ class BoardsController < ApplicationController
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:project_slug])
     @board = @project.board
+    if @board==nil
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end

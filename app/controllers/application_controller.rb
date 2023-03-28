@@ -4,6 +4,6 @@ class ApplicationController < ActionController::Base
 
   private
   def record_not_found
-    redirect_to root_path, alert: "Not a valid id"
+    redirect_to root_path, alert: "Record not found"
   end
 end

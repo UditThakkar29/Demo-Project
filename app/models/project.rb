@@ -1,7 +1,7 @@
 class Project < ApplicationRecord
   # belongs_to :user
   extend FriendlyId
-  friendly_id :name, use: :slugged
+  friendly_id :generated_slug, use: :slugged
 
   has_and_belongs_to_many :users
   has_one :board, dependent: :destroy
@@ -10,6 +10,11 @@ class Project < ApplicationRecord
 
   after_create :create_board
   # before_destroy :delete_board
+
+  def generated_slug
+    require 'securerandom'
+    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(4)
+  end
 
   private
   def create_board
