@@ -7,7 +7,7 @@ Rails.application.routes.draw do
 
   # get '/users', to: 'devise/registrations#new'
   devise_for :users, controllers: {
-    registrations: 'registrations',
+    registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
   # devise_scope :user do
@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   # get '/confirm', to: "users/registrations#after_signup"
   # resources :users do
   resources :projects, param: :slug do
+    resources :invitations, only: [:new]
     resources :boards, param: :slug do
       resources :sprints, param: :slug do
         resources :tickets do

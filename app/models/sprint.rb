@@ -13,7 +13,6 @@ class Sprint < ApplicationRecord
   has_many :tickets, through: :sprint_tickets
 
   def generated_slug
-    require 'securerandom'
-    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(4)
+    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
   end
 end
