@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model to store all projects created by user.
 class Project < ApplicationRecord
   # belongs_to :user
 
@@ -13,10 +16,11 @@ class Project < ApplicationRecord
   # before_destroy :delete_board
 
   def generated_slug
-    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
+    @generated_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
   end
 
   private
+
   def create_board
     Project.last.build_board(name: "#{Project.last.name}-Board").save
   end
@@ -24,5 +28,4 @@ class Project < ApplicationRecord
   # def delete_board
   #   Project.last.board.destroy
   # end
-
 end

@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model to store all Sprints which are created from board.
 class Sprint < ApplicationRecord
 
   extend FriendlyId
@@ -13,6 +16,6 @@ class Sprint < ApplicationRecord
   has_many :tickets, through: :sprint_tickets
 
   def generated_slug
-    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
+    @generated_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
   end
 end

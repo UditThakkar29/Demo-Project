@@ -61,3 +61,4 @@ gem "rolify"
 gem 'cancancan'
 gem 'aasm', '~> 4.12'
 gem 'friendly_id'
+gem 'rubocop'

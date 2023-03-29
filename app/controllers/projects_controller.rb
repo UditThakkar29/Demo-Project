@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_by_slug, only: [:show,:edit,:update,:destroy]
+  before_action :find_by_slug, only: [:show,:edit,:update,:destroy,:remove_users]
   def index
     @projects = Project.all
   end
@@ -46,7 +46,15 @@ class ProjectsController < ApplicationController
     redirect_to projects_path
   end
 
+  def remove_users
+    # @project
+    id = params[:user]
+    @project.users.delete(User.find(id))
+    redirect_to @project
+  end
+
   private
+
 
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:slug])

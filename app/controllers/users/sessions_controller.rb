@@ -7,15 +7,20 @@ class Users::SessionsController < Devise::SessionsController
     @project = Project.friendly.find_by_slug(params[:slug]) if params[:slug]
     super
   end
-  # GET /resource/sign_in
-  # def new
-  #   super
-  # end
 
   def create
     project = Project.friendly.find_by_slug(params[:user][:slug])
+    flag = false
     if project
-      project.users << current_user if project
+      project.users.each do |user|
+        if user.email == current_user.email
+          flag = true
+          break
+        end
+      end
+    end
+    if not flag
+      project.users << current_user
     end
     super
   end

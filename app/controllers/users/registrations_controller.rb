@@ -17,11 +17,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   def after_inactive_sign_up_path_for(resource)
-    puts "######################"
-    puts "######################"
-    puts "registration controller"
-    puts "######################"
-    puts "######################"
     "/confirmation_pending"
   end
 end

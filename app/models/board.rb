@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model to store all Board which are created on project creation.
 class Board < ApplicationRecord
 
   extend FriendlyId
@@ -9,7 +12,7 @@ class Board < ApplicationRecord
   has_many :sprints, dependent: :destroy
 
   def generated_slug
-    @random_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
+    @generated_slug ||= persisted? ? friendly_id : SecureRandom.hex(8)
   end
 
 end
