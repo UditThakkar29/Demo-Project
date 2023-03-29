@@ -1,0 +1,19 @@
+
+<div class="d-flex">
+  <%= render "navbar" %>
+
+  <div class="ms-5 mt-2 mb-2" style="width: 80%;">
+    <%= form_with model: ticket, url:project_board_sprint_ticket_path do |form| %>
+    <%= form.label :name%><br>
+    <%= form.text_field :name, class:""%><br>
+    <%= form.label :summary %><br>
+    <%= form.text_field :summary, class:""%><br>
+    <%= form.label :priority %><br>
+    <%= form.select :priority, ['High', 'Medium', 'Low'], selected: 'Low',class:" mt-3"%><br>
+    <%= form.label :status %><br>
+    <%= form.select :status, ['to_do', 'progress', 'QA','done'], selected: 'to_do',class:" mt-3"%><br>
+    <%= form.select(:state, options_for_select(User.all.collect { |u| [ u.email, u.id] unless u.has_role? :manager }.compact),{:class => "form-select"}) %>
+    <%= form.submit "Create Ticket",class: "btn btn-primary btn-lg mt-3" %>
+  <% end %>
+  </div>
+</div>

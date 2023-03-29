@@ -1,6 +1,6 @@
 class TicketsController < ApplicationController
 
-  before_action :get_by_slug, only: [:show, :new, :create]
+  before_action :get_by_slug, only: [:show, :new, :create,:edit]
   before_action :get_by_slug_aasm, only: [:doing, :testing, :done]
 
   def show
@@ -19,6 +19,19 @@ class TicketsController < ApplicationController
       redirect_to project_board_sprint_path(slug:@sprint)
     else
       render :new
+    end
+  end
+
+  def edit
+    @ticket = Ticket.find(params[:id])
+  end
+
+  def update
+    @ticket = Ticket.find(params[:id])
+    if @ticket.update(ticket_params)
+      redirect_to project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug])
+    else
+      render :edit
     end
   end
 
@@ -42,6 +55,7 @@ class TicketsController < ApplicationController
 
   def get_by_slug
     @project = Project.friendly.find_by_slug(params[:project_slug])
+    # @board = @project.board
     @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
   end
 
@@ -51,6 +65,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name,:summary,:priority,:status,:reporter_id)
+    params.require(:ticket).permit(:name,:summary,:priority,:status,:reporter_id,:assigned_to,:assigned_user_id)
   end
 end

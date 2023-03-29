@@ -28,8 +28,9 @@
     <% else %>
       <h5>All done for this ticket</h5>
     <% end %>
+    <br>
 
-    <h4>Assign Task to any user</h4>
+    <%= link_to "Assign Task to any user", edit_project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug]), class:"btn btn-primary" %>
   </div>
 
 </div>
