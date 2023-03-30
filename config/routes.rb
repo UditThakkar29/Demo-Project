@@ -18,10 +18,6 @@ Rails.application.routes.draw do
   # get '/confirm', to: "users/registrations#after_signup"
   # resources :users do
   resources :projects, param: :slug do
-    member do
-      get 'remove_users'
-    end
-    resources :invitations, only: %i[new create]
     resources :boards, param: :slug do
       resources :sprints, param: :slug do
         resources :tickets do
@@ -32,6 +28,10 @@ Rails.application.routes.draw do
           end
         end
       end
+    end
+    resources :invitations, only: %i[new create]
+    member do
+      get 'remove_users'
     end
   end
 
