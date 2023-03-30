@@ -1,3 +1,6 @@
+# frozen_string_literal: true
+
+# Model to store all Users.
 class User < ApplicationRecord
   after_create :assign_default_role
   rolify
@@ -8,7 +11,6 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable, :trackable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable, :confirmable
-
 
   def assign_default_role
     self.add_role(:user) if self.roles.blank?

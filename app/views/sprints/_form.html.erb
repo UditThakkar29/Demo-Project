@@ -1,0 +1,12 @@
+<%= form_with model: @sprint, url: project_board_sprints_path do |form| %>
+  <%= form.label :name%>
+  <%= form.text_field :name, class:"form-control form-control-lg"%>
+  <%= form.label :start_time %>
+  <%= form.date_field :start_time, class:"form-control form-control-lg"%>
+  <%= form.label :goal %>
+  <%= form.text_field :goal, class:"form-control form-control-lg"%>
+  <%= form.label :duration %>
+  <%= form.number_field :duration, class:"form-control form-control-lg" %>
+  <%= form.submit "Create Sprint",class: "btn btn-primary btn-lg" %>
+<% end %>
+
