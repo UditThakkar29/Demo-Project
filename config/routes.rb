@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'dashboard/index'
 
-
   devise_for :users, controllers: {
     registrations: 'users/registrations',
     sessions: 'users/sessions'
@@ -16,24 +15,24 @@ Rails.application.routes.draw do
 
 
   resources :projects, param: :slug do
-    member do
-      get "remove_users"
-    end
-    resources :invitations, only: [:new, :create]
     resources :boards, param: :slug do
       resources :sprints, param: :slug do
         resources :tickets do
           member do
-            patch :doing
-            patch :testing
+            patch :start
+            patch :test
             patch :done
           end
         end
       end
     end
+    resources :invitations, only: %i[new create]
+    member do
+      get 'remove_users'
+    end
   end
 
-  get '/projects/:project_id/boards/:id', to: "boards#index"
+  get '/projects/:project_id/boards/:id', to: 'boards#index'
   # end
 
   get 'main/show', to: "main#show"

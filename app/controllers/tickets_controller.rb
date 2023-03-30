@@ -1,7 +1,6 @@
 class TicketsController < ApplicationController
-
-  before_action :get_by_slug, only: [:show, :new, :create,:edit]
-  before_action :get_by_slug_aasm, only: [:doing, :testing, :done]
+  before_action :get_by_slug, only: %i[show new create edit]
+  before_action :get_by_slug_aasm, only: %i[start test done]
 
   def show
     @ticket = Ticket.find(params[:id])
@@ -16,7 +15,7 @@ class TicketsController < ApplicationController
     # @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
     if @ticket.save
       @ticket.sprint_tickets.create(sprint: @sprint)
-      redirect_to project_board_sprint_path(slug:@sprint)
+      redirect_to project_board_sprint_path(slug: @sprint)
     else
       render :new
     end
@@ -29,27 +28,27 @@ class TicketsController < ApplicationController
   def update
     @ticket = Ticket.find(params[:id])
     if @ticket.update(ticket_params)
-      redirect_to project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug])
+      redirect_to project_board_sprint_ticket_path(@ticket, project_slug: params[:project_slug],
+                                                            sprint_slug: params[:sprint_slug], board_slug: params[:board_slug])
     else
       render :edit
     end
   end
 
-  def doing
-    @ticket.doing!
-    redirect_to project_board_sprint_path(slug:@sprint)
+  def start
+    @ticket.start!
+    redirect_to project_board_sprint_path(slug: @sprint)
   end
 
-  def testing
-    @ticket.testing!
-    redirect_to project_board_sprint_path(slug:@sprint)
+  def test
+    @ticket.test!
+    redirect_to project_board_sprint_path(slug: @sprint)
   end
 
   def done
     @ticket.done!
-    redirect_to project_board_sprint_path(slug:@sprint)
+    redirect_to project_board_sprint_path(slug: @sprint)
   end
-
 
   private
 
@@ -65,6 +64,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name,:summary,:priority,:status,:reporter_id,:assigned_to,:assigned_user_id)
+    params.require(:ticket).permit(:name, :summary, :priority, :status, :reporter_id, :assigned_user_id)
   end
 end
