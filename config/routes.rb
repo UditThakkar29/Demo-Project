@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   root 'main#index'
   get 'dashboard/index'
 
-
   # get '/users', to: 'devise/registrations#new'
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -20,15 +19,15 @@ Rails.application.routes.draw do
   # resources :users do
   resources :projects, param: :slug do
     member do
-      get "remove_users"
+      get 'remove_users'
     end
-    resources :invitations, only: [:new, :create]
+    resources :invitations, only: %i[new create]
     resources :boards, param: :slug do
       resources :sprints, param: :slug do
         resources :tickets do
           member do
-            patch :doing
-            patch :testing
+            patch :start
+            patch :test
             patch :done
           end
         end
@@ -36,11 +35,11 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/projects/:project_id/boards/:id', to: "boards#index"
+  get '/projects/:project_id/boards/:id', to: 'boards#index'
   # end
 
-  get 'main/show', to: "main#show"
-  get 'dashboard/index', to: "dashboard#index"
-  get 'dashboard/project', to: "dashboard#project"
+  get 'main/show', to: 'main#show'
+  get 'dashboard/index', to: 'dashboard#index'
+  get 'dashboard/project', to: 'dashboard#project'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
 end

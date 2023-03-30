@@ -3,7 +3,7 @@
   <%= render "navbar" %>
 
   <div class="ms-5 mt-2 mb-2" style="width: 80%;">
-    <%= form_with model: ticket, url:project_board_sprint_ticket_path do |form| %>
+    <%= form_with model: ticket,url: project_board_sprint_tickets_path do |form| %>
     <%= form.label :name, class: "mt-2 mb-2"%><br>
     <%= form.text_field :name, class:""%><br>
     <%= form.label :summary, class: "mt-2 mb-2" %><br>
@@ -19,4 +19,5 @@
   <% end %>
   </div>
 </div>
+
 

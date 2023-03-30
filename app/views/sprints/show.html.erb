@@ -35,7 +35,7 @@
         <ul class="list-items">
           <%= render "tickets/to-do", tickets: @sprint.tickets %>
         </ul>
-        <%= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_slug: @sprint), class: "add-card-btn btn btn-info", style:"color: black" %>
+        <%= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_slug: params[:slug]), class: "add-card-btn btn btn-info", style:"color: black" %>
         <%# <button class="add-card-btn btn">Add a card</button> %>
       </div>
       <div class="list">
