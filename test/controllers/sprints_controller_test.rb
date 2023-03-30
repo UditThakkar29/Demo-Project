@@ -1,8 +1,8 @@
 require "test_helper"
 
-class HomeControllerTest < ActionDispatch::IntegrationTest
+class SprintsControllerTest < ActionDispatch::IntegrationTest
   test "should get index" do
-    get home_index_url
+    get sprints_index_url
     assert_response :success
   end
 end

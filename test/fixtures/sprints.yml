@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  start_time: 2023-03-22 15:26:07
+  duration: 1
+  board: one
+
+two:
+  name: MyString
+  start_time: 2023-03-22 15:26:07
+  duration: 1
+  board: two
