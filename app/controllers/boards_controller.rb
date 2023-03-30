@@ -3,7 +3,8 @@ class BoardsController < ApplicationController
   before_action :find_by_slug, only: [:index,:show]
 
   def index
-    @sprints = @board.sprints
+    @sprints = @board.sprints.current_sprint
+    @backlog = @board.sprints.backlog_sprint
   end
 
   def show

@@ -25,6 +25,18 @@
           </div>
         </article>
       <% end %>
+      <% backlog.each do |backlog| %>
+        <article class="postcard light blue">
+          <div class="postcard__text t-dark">
+            <h1 class="postcard__title blue"><%= backlog.name %></h1>
+            <ul class="postcard__tagbox">
+              <li class="tag__item play blue">
+                <%= link_to "Show Tickets", backlog_tickets_project_board_sprint_path(slug: backlog,board_slug: @board)%>
+					    </li>
+            </ul>
+          </div>
+        </article>
+      <% end %>
     </div>
   </section>
 </div>

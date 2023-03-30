@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_03_29_102846) do
+ActiveRecord::Schema.define(version: 2023_03_30_123401) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -72,6 +72,8 @@ ActiveRecord::Schema.define(version: 2023_03_29_102846) do
     t.datetime "updated_at", precision: 6, null: false
     t.text "goal"
     t.string "slug"
+    t.boolean "current_sprint"
+    t.boolean "backlog_sprint"
     t.index ["board_id"], name: "index_sprints_on_board_id"
     t.index ["slug"], name: "index_sprints_on_slug", unique: true
   end

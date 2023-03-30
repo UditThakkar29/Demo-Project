@@ -55,7 +55,6 @@ class ProjectsController < ApplicationController
 
   private
 
-
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:slug])
     if @project==nil
