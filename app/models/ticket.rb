@@ -3,8 +3,8 @@
 # Model to store all Tickets.
 class Ticket < ApplicationRecord
   include AASM
-  has_many :sprint_tickets, dependent: :destroy
-  has_many :sprints, through: :sprint_tickets
+  has_many :sprint_tickets
+  has_many :sprints, through: :sprint_tickets, dependent: :destroy
 
   aasm column: 'status', whiny_transitions: false do
     state :to_do, initial: true
