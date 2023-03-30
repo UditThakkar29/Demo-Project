@@ -33,6 +33,7 @@ class SprintsController < ApplicationController
   end
 
   def end_sprint
+    
     redirect_to project_board_sprint_path(slug: params[:slug])
   end
 
