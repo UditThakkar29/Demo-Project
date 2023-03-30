@@ -18,6 +18,10 @@
     </div>
   <% end %>
 
+  <div class="field">
+    <%= f.hidden_field :slug, value: @project.slug if @project %>
+  </div>
+
   <div class="actions">
     <%= f.submit "Log in" %>
   </div>

@@ -15,4 +15,20 @@
       </div>
     </div>
   </div>
+  <div class="container mt-5 ">
+    <% @project.users.each do |user| %>
+      <h5><%= user.email %></h5>
+      <% unless user.has_role? :manager %>
+        <% if current_user.has_role? :manager %>
+          <%= link_to "Remove User",remove_users_project_path(@project,user: user) %>
+        <% end %>
+      <% end %>
+    <% end %>
+    <hr>
+    <%#= link_to "Invite user", new_project_invitation_path(@project), class: "btn btn-outline-primary" %>
+    <% if current_user.has_role? :manager %>
+      <h3 class="text-success">Invite</h3>
+      <input class="group-url w-50" id="cb-link-field" type="text" value="<%= new_project_invitation_url(@project) %>">
+    <% end %>
+  </div>
 </div>

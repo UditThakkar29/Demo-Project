@@ -1,14 +1,21 @@
 class BoardsController < ApplicationController
   before_action :authenticate_user!
+  before_action :find_by_slug, only: [:index,:show]
 
   def index
-    @project = Project.find(params[:project_id])
-    @board = @project.board
     @sprints = @board.sprints
   end
 
   def show
-    @project = Project.find(params[:project_id])
+  end
+
+  private
+
+  def find_by_slug
+    @project = current_user.projects.friendly.find_by_slug(params[:project_slug])
     @board = @project.board
+    if @board==nil
+      raise ActiveRecord::RecordNotFound
+    end
   end
 end
