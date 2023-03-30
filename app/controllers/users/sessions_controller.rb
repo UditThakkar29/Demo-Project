@@ -9,19 +9,8 @@ class Users::SessionsController < Devise::SessionsController
   end
 
   def create
-    project = Project.friendly.find_by_slug(params[:user][:slug])
-    flag = false
-    if project
-      project.users.each do |user|
-        if user.email == current_user.email
-          flag = true
-          break
-        end
-      end
-    end
-    if not flag
-      project.users << current_user
-    end
+    @project = Project.friendly.find_by_slug(params[:user][:slug])
+    add_user_to_project
     super
   end
 
@@ -41,7 +30,22 @@ class Users::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
-  def after_sign_up_path_for(resource)
+  def after_sign_up_path_for(_resource)
     dashboard_index_path
+  end
+
+  private
+
+  def add_user_to_project
+    flag = false
+    return unless @project
+
+    @project.users.each do |user|
+      if user.email == current_user.email
+        flag = true
+        break
+      end
+    end
+    @project.users << current_user unless flag
   end
 end
