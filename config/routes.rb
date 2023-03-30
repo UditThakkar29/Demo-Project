@@ -24,6 +24,10 @@ Rails.application.routes.draw do
             patch :done
           end
         end
+        member do
+          get :end_sprint
+          get :backlog_tickets
+        end
       end
     end
     resources :invitations, only: %i[new create]

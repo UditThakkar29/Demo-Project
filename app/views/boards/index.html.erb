@@ -19,6 +19,7 @@
     </nav>
   </div>
 
-  <%= render "shared/sprints", sprints: @sprints %>
+  <%#= render "shared/sprints", sprints: @sprints %>
+  <%= render partial: "shared/sprints", locals: {sprints: @sprints, backlog: @backlog}%>
 
 </div>
