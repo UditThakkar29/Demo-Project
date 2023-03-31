@@ -6,11 +6,6 @@ class SprintsController < ApplicationController
   before_action :find_by_slug, only: %i[show new create end_sprint backlog_tickets]
   before_action :new_sprint_is_present, only: %i[end_sprint]
   before_action :find_sprints, only: %i[select_sprint]
-  # def index
-  #   @project = Project.friendly.find_by_slug(params[:project_slug])
-  #   @board = @project.board
-  #   @sprints = Sprint.all
-  # end
 
   def show
     @sprint = Sprint.friendly.find_by_slug(params[:slug])
@@ -75,8 +70,8 @@ class SprintsController < ApplicationController
 
   def update_state
     @previous_sprint.current_sprint = false
-    @previous_sprint.save
     @current_sprint.current_sprint = true
+    @previous_sprint.save
     @current_sprint.save
   end
 
