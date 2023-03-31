@@ -1,6 +1,79 @@
-<h1>Main View</h1>
+
+<style>
+
+.card-title, .card-text{
+  color: black;
+}
+
+  body{
+  background-color: #091e42;
+  color: white;
+
+}
+.heading{
+  // color: white;
+  text-align: center;
+
+}
+
+.custom{
+  display: flex;
+  flex-wrap: initial;
+}
+
+.text{
+  padding: 50px;
+}
+
+.login-card{
+  padding-top: 45px;
+  margin-left: 70px;
+}
+
+/* .image{
+  height: 24px;
+  width: 30px;
+} */
 
 
-<% if user_signed_in? %>
-  <%= link_to "All Projects", home_index_path, class: "btn btn-primary"%>
-<% end %>
+</style>
+<%= render "main/navbar" %>
+
+<div class="container">
+  <div class="row custom">
+    <div class="col-lg-6 ms-4 text">
+      <div>
+        <p class="h4">Welcome to Jeera, the ultimate project management and collaboration tool for teams of any size. Our platform helps you streamline project workflows, and ensures that everyone has the information they need to get things done on time.</p>
+        <p class="h4">
+        Designed to be powerful and user-friendly, our Jira clone was created to help teams of developers, marketers, and project managers work more efficiently and effectively together.</p>
+        <p class="h4">Unlike other project management software, our platform was built around a people-centric approach, making it easy for you to meet your team’s specific needs and to achieve success, with less stress. </p>
+        <p ><h5>Our app include following things :</h5></p>
+        <ul style="list-style-type:none;">
+          <li class="h6">Create multiple projects</li>
+          <li class="h6">Create multiple boards</li>
+          <li class="h6">Create multiple projects</li>
+          <li class="h6">Create multiple tasks</li>
+        </ul>
+      </div>
+    </div>
+    <div class="col-lg-6 login-card">
+      <div class="card" style="width: 25rem; height: 25rem;">
+        <div class="card-body">
+          <h5 class="card-title text-center mb-3 fs-2">Get Started</h5>
+          <h6 class="card-subtitle mb-2 text-muted fs-5">Welcome to Jeera. We’re so glad you’ve chosen to join us in changing the game of project management and team collaboration.</h6>
+
+          <% if user_signed_in? %>
+            <%= link_to "Dashboard", dashboard_index_path,class: "btn btn-primary mb-3" %>
+            <br>
+            <%= link_to "Log Out", destroy_user_session_path, method: :delete ,class: "btn btn-danger mb-3" %>
+          <% else %>
+            <p class="card-text">To get started create your account by clicking on the Sign Up button</p>
+            <%= link_to "Sign Up", new_user_registration_path,class: "btn btn-primary mb-3" %>
+            <p class="card-text">If you returning back Sign In</p>
+            <%= link_to "Sign In", user_session_path,class: "btn btn-primary" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

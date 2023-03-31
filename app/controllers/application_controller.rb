@@ -1,6 +1,9 @@
 class ApplicationController < ActionController::Base
-  protected
-  # def after_sign_in_path_for(resource)
-  #   home_index_path
-  # end
+  rescue_from ::ActiveRecord::RecordNotFound, with: :record_not_found
+
+
+  private
+  def record_not_found
+    redirect_to root_path, alert: "Record not found"
+  end
 end

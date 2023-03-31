@@ -1,0 +1,67 @@
+<div class="d-flex">
+  <div>
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="card mt-2 ms-2">
+      <h3 class="text-center"><%= @project.name%></h3>
+      </div>
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-2">
+          <%= link_to "Back to Board", project_boards_path(id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All Sprints", project_board_sprints_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%= link_to "End Sprint", end_sprint_project_board_sprint_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <a href="" class="list-group-item list-group-item-action py-2 ripple">
+            <span>#</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="ms-5 mt-2" style="width: 80%;">
+
+    <div class="row",style="align-items: flex-end;">
+      <h3><%= @sprint.name %></h3>
+      <h5><%= @sprint.goal %></h5>
+      <p><%= @sprint.start_time %></p>
+      <p><%= @sprint.duration %></p>
+
+    </div>
+    <%#= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_id: @sprint), class: "btn btn-primary" %>
+    <div class="row">
+      <section class="lists-container">
+      <div class="list">
+        <h3 class="list-title">To Do</h3>
+        <ul class="list-items">
+          <%= render "tickets/to-do", tickets: @sprint.tickets %>
+        </ul>
+        <%= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_slug: params[:slug]), class: "add-card-btn btn btn-info", style:"color: black" %>
+        <%# <button class="add-card-btn btn">Add a card</button> %>
+      </div>
+      <div class="list">
+        <h3 class="list-title">In Progress</h3>
+        <ul class="list-items">
+          <%= render "tickets/progress", tickets: @sprint.tickets %>
+        </ul>
+        <%# <button class="add-card-btn btn">Add a card</button> %>
+      </div>
+      <div class="list">
+        <h3 class="list-title">QA</h3>
+        <ul class="list-items">
+          <%= render "tickets/qa", tickets: @sprint.tickets %>
+        </ul>
+        <%# <button class="add-card-btn btn">Add a card</button> %>
+      </div>
+      <div class="list">
+        <h3 class="list-title">Done</h3>
+        <ul class="list-items">
+          <%= render "tickets/done", tickets: @sprint.tickets %>
+        </ul>
+        <%# <button class="add-card-btn btn">Add a card</button> %>
+      </div>
+
+    </section>
+    </div>
+  </div>
+</div>
+

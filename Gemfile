@@ -56,3 +56,9 @@ end
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem "devise"
 gem "letter_opener"
+gem "awesome_print"
+gem "rolify"
+gem 'cancancan'
+gem 'aasm', '~> 4.12'
+gem 'friendly_id'
+gem 'rubocop'
