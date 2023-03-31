@@ -23,6 +23,9 @@ class Ticket < ApplicationRecord
     event :done do
       transitions from: :testing, to: :done
     end
+    event :reset do
+      transitions from: %i[doing testing], to: :to_do
+    end
   end
 
   def log_status_change

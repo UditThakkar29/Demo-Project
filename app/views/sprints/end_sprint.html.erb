@@ -1,0 +1,28 @@
+<div class="d-flex">
+  <div>
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <h3 class="text-center"><%= @project.name%></h3>
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-2">
+          <%= link_to "Back to Board", project_boards_path(id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%= link_to "All Sprints", project_boards_path(id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "Create Sprint", new_project_board_sprint_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <a href="" class="list-group-item list-group-item-action py-2 ripple">
+            <span>#</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="ms-5 mt-2" style="width: 80%;">
+    <h3>Select next sprint to start and transfer tickets to :)</h3>
+    <% @board.sprints.each do |sprint| %>
+      <% if sprint.current_sprint.nil? && sprint.backlog_sprint.nil? %>
+        <%= link_to "Select #{sprint.name}",select_sprint_project_board_sprint_path(sprint, board_slug: params[:board_slug],project_slug: params[:project_slug],sprint_slug: params[:slug]), method: :patch %>
+      <% end %>
+    <% end %>
+  </div>
+
+</div>

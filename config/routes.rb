@@ -27,6 +27,7 @@ Rails.application.routes.draw do
         member do
           get :end_sprint
           get :backlog_tickets
+          patch :select_sprint
         end
       end
     end
