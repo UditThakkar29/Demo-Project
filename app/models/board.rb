@@ -22,5 +22,4 @@ class Board < ApplicationRecord
   def create_backlog_sprint
     Board.last.sprints.create(name: "Backlog",start_time: DateTime.now,goal: "To store backlog tickets",current_sprint: false, backlog_sprint: true)
   end
-
 end

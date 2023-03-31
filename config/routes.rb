@@ -1,6 +1,5 @@
 Rails.application.routes.draw do
   root 'main#index'
-  get 'dashboard/index'
 
   devise_for :users, controllers: {
     registrations: 'users/registrations',
@@ -12,7 +11,6 @@ Rails.application.routes.draw do
   # end
 
   get 'confirmation_pending' => 'main#after_registration_path'
-
 
   resources :projects, param: :slug do
     resources :boards, param: :slug do
@@ -37,10 +35,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/projects/:project_id/boards/:id', to: 'boards#index'
-  # end
-
-  get 'main/show', to: "main#show"
   get 'dashboard/index', to: "dashboard#index"
-  get 'dashboard/project', to: "dashboard#project"
 end

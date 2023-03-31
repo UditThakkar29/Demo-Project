@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
+    # debugger
   end
 
   def new
