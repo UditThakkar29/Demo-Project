@@ -1,9 +1,6 @@
 class MainController < ApplicationController
   def index
-    render layout: "home.html.erb"
-  end
-
-  def show
+    render layout: "home"
   end
 
   def after_registration_path

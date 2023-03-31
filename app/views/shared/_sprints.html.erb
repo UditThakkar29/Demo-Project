@@ -1,0 +1,43 @@
+
+<div style="width: 80%;">
+  <section class="light">
+    <div class="container py-2">
+      <div class="h1 text-center text-dark" id="pageHeaderTitle">All Sprints</div>
+      <% sprints.each do |sprint| %>
+        <article class="postcard light blue">
+          <div class="postcard__text t-dark">
+            <h1 class="postcard__title blue"><%= sprint.name %></h1>
+            <div class="postcard__subtitle small">
+              <time datetime="2020-05-25 12:00:00">
+                <%= sprint.start_time %>
+              </time>
+            </div>
+            <div class="postcard__bar"></div>
+            <div class="postcard__preview-txt"><%= sprint.goal %></div>
+            <div class="postcard__subtitle medium">
+              <%= "#{sprint.duration} days" %>
+            </div>
+            <ul class="postcard__tagbox">
+              <li class="tag__item play blue">
+                <%= link_to "Show Sprint", project_board_sprint_path(slug: sprint,board_slug: @board)%>
+					    </li>
+            </ul>
+          </div>
+        </article>
+      <% end %>
+      <% backlog.each do |backlog| %>
+        <article class="postcard light blue">
+          <div class="postcard__text t-dark">
+            <h1 class="postcard__title blue"><%= backlog.name %></h1>
+            <ul class="postcard__tagbox">
+              <li class="tag__item play blue">
+                <%= link_to "Show Tickets", backlog_tickets_project_board_sprint_path(slug: backlog,board_slug: @board)%>
+					    </li>
+            </ul>
+          </div>
+        </article>
+      <% end %>
+    </div>
+  </section>
+</div>
+
