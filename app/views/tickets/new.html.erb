@@ -5,6 +5,11 @@
   <%= render "navbar" %>
 
   <div class="ms-5 mt-2 mb-2" style="width: 80%;">
+    <% if @ticket.errors.any? %>
+      <% @ticket.errors.full_messages.each do |message|%>
+        <p><%= message %> </p>
+      <%end%>
+    <%end%>
     <%= form_with model: @ticket, url:project_board_sprint_tickets_path do |form| %>
     <%= form.label :name%><br>
     <%= form.text_field :name, class:""%><br>

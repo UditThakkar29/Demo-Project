@@ -6,6 +6,9 @@ class Ticket < ApplicationRecord
   has_many :sprint_tickets
   has_many :sprints, through: :sprint_tickets, dependent: :destroy
 
+  validates :name, presence: true
+  validates :summary, presence: true
+
   aasm column: 'status', whiny_transitions: false do
     state :to_do, initial: true
     state :doing
