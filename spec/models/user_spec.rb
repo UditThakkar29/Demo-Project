@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 RSpec.describe User, type: :model do
   context 'when creating a user' do
@@ -9,9 +10,8 @@ RSpec.describe User, type: :model do
       expect(user.valid?).to eq(true)
     end
 
-    # it 'should be assigned a default role' do
-    #   expect(user1.has_role? :user).to eq(true)
-    # end
-
+    it 'should be assigned a default role' do
+      expect(user1.has_role? :manager).to eq(true)
+    end
   end
 end
