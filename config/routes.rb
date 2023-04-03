@@ -17,6 +17,7 @@ Rails.application.routes.draw do
       resources :sprints, param: :slug do
         resources :tickets do
           member do
+            get :add_to_current_sprint
             patch :start,:test,:done
           end
         end

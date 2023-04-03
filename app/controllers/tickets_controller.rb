@@ -1,6 +1,9 @@
+# frozen_string_literal: true
+
+# Controller for tickets
 class TicketsController < ApplicationController
-  before_action :get_by_slug, only: %i[show new create edit]
-  before_action :get_by_slug_aasm, only: %i[start test done]
+  before_action :find_by_slug, only: %i[show new create edit]
+  before_action :find_by_slug_aasm, only: %i[start test done]
 
   def show
     @ticket = Ticket.find(params[:id])
@@ -54,15 +57,24 @@ class TicketsController < ApplicationController
     redirect_to project_board_sprint_path(slug: @sprint)
   end
 
+  def add_to_current_sprint
+    active_sprint = Sprint.find_by(current_sprint: true)
+    ticket = Ticket.find(params[:id])
+    # current_sprint = ticket.sprints.find_by(name: "Backlog")
+    ticket.sprints.destroy_all
+    ticket.sprint_tickets.create(sprint: active_sprint)
+    redirect_to project_board_sprint_path(slug: active_sprint)
+  end
+
   private
 
-  def get_by_slug
+  def find_by_slug
     @project = Project.friendly.find_by_slug(params[:project_slug])
     # @board = @project.board
     @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
   end
 
-  def get_by_slug_aasm
+  def find_by_slug_aasm
     @ticket = Ticket.find(params[:id])
     @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
   end

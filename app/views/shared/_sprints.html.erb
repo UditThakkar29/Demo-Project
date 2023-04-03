@@ -1,10 +1,13 @@
 
 <div style="width: 80%;">
   <section class="light">
-    <div class="container py-2">
+    <div class="container py-4">
       <div class="h1 text-center text-dark" id="pageHeaderTitle">All Sprints</div>
       <% sprints.each do |sprint| %>
         <article class="postcard light blue">
+          <a class="postcard__img_link" href="#">
+            <img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />
+          </a>
           <div class="postcard__text t-dark">
             <h1 class="postcard__title blue"><%= sprint.name %></h1>
             <div class="postcard__subtitle small">
@@ -27,6 +30,9 @@
       <% end %>
       <% backlog.each do |backlog| %>
         <article class="postcard light blue">
+          <a class="postcard__img_link" href="#">
+            <img class="postcard__img" src="https://picsum.photos/501/500" alt="Image Title" />
+          </a>
           <div class="postcard__text t-dark">
             <h1 class="postcard__title blue"><%= backlog.name %></h1>
             <ul class="postcard__tagbox">
