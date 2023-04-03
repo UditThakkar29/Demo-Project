@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-# Model to store all Sprints.
+# Controller for sprint
 class SprintsController < ApplicationController
   before_action :authenticate_user!
   before_action :find_by_slug, only: %i[show new create end_sprint backlog_tickets]
-  before_action :new_sprint_is_present, only: %i[end_sprint]
+  before_action :can_be_ended, only: %i[end_sprint]
   before_action :find_sprints, only: %i[select_sprint]
 
   def show
@@ -75,15 +75,29 @@ class SprintsController < ApplicationController
     @current_sprint.save
   end
 
-  def new_sprint_is_present
+  def can_be_ended
+    flag = check_if_sprint_complete
     is_present = false
     @tickets = []
     @board.sprints.each do |sprint|
       is_present = true if sprint.current_sprint.nil? && sprint.backlog_sprint.nil?
     end
-    if is_present
+    if flag && is_present
     else
-      redirect_to new_project_board_sprint_path(board_slug: @board), alert: 'No sprint to transfer tickets to, Create a ticket first then try again!'
+      if flag == false
+        redirect_to project_board_sprint_path(slug: @sprint), alert: "You cannot end sprint before it's end time"
+      else
+        redirect_to new_project_board_sprint_path(board_slug: @board), alert: 'No sprint to transfer tickets to, Create a ticket first then try again!'
+      end
+    end
+  end
+
+  def check_if_sprint_complete
+    time_passed = (DateTime.now.to_date - @sprint.start_time.to_date).to_i
+    if @sprint.duration <= time_passed
+      return true
+    else
+      return false
     end
   end
 end
