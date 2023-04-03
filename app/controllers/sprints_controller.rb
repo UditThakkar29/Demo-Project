@@ -20,6 +20,9 @@ class SprintsController < ApplicationController
 
   def create
     @sprint = @board.sprints.create(sprint_params)
+    if Sprint.where(current_sprint: true).count == 0 and Sprint.name!="Backlog"
+      @sprint.current_sprint = true
+    end
 
     if @sprint.save
       redirect_to project_board_sprint_path(slug: @sprint)
@@ -57,10 +60,6 @@ class SprintsController < ApplicationController
     @project = current_user.projects.friendly.find_by_slug(params[:project_slug])
     @board = @project.board
     @sprint = Sprint.friendly.find_by_slug(params[:slug])
-  end
-
-  def sprint_params
-    params.require(:sprint).permit(:name, :start_time, :goal, :duration)
   end
 
   def find_sprints
@@ -103,5 +102,9 @@ class SprintsController < ApplicationController
     else
       return false
     end
+  end
+
+  def sprint_params
+    params.require(:sprint).permit(:name, :start_time, :goal, :duration,:image)
   end
 end

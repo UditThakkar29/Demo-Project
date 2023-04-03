@@ -7,6 +7,8 @@
   <%= form.text_field :goal, class:"form-control form-control-lg"%>
   <%= form.label :duration %>
   <%= form.number_field :duration, class:"form-control form-control-lg" %>
+  <%= form.label :image %>
+  <%= form.file_field :image %>
   <%= form.submit "Create Sprint",class: "btn btn-primary btn-lg" %>
 <% end %>
 
