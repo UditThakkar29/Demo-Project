@@ -4,6 +4,7 @@ class TicketsController < ApplicationController
 
   def show
     @ticket = Ticket.find(params[:id])
+    # debugger
   end
 
   def new
@@ -12,10 +13,13 @@ class TicketsController < ApplicationController
 
   def create
     @ticket = Ticket.create(ticket_params)
-    # @sprint = Sprint.friendly.find_by_slug(params[:sprint_slug])
     if @ticket.save
       @ticket.sprint_tickets.create(sprint: @sprint)
-      redirect_to project_board_sprint_path(slug: @sprint)
+      if @sprint.backlog_sprint == true
+        redirect_to backlog_tickets_project_board_sprint_path(slug: @sprint)
+      else
+        redirect_to project_board_sprint_path(slug: @sprint)
+      end
     else
       render :new
     end

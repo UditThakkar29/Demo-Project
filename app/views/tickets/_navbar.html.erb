@@ -5,7 +5,11 @@
       </div>
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-2">
+          <% if @sprint.backlog_sprint == true %>
+            <%= link_to "Back to Sprint", backlog_tickets_project_board_sprint_path(slug: @sprint), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <% else %>
           <%= link_to "Back to Sprint", project_board_sprint_path(slug: @sprint), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <% end %>
           <%= link_to "Back to Board", project_boards_path(board_slug: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
           <%#= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
           <%#= link_to "All Sprints", project_board_sprints_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
