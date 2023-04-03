@@ -95,7 +95,11 @@ class SprintsController < ApplicationController
   def check_if_sprint_complete
     time_passed = (DateTime.now.to_date - @sprint.start_time.to_date).to_i
     if @sprint.duration <= time_passed
-      return true
+      if (DateTime.now.hour - @sprint.start_time.hour).to_i > 0
+        return false
+      else
+        return true
+      end
     else
       return false
     end
