@@ -3,9 +3,7 @@
 // You can use Sass (SCSS) here: https://sass-lang.com/
 
 @import url("https://fonts.googleapis.com/css2?family=Baloo+2&display=swap");
-article{
-  width: 300px;
-}
+/* This pen */
 
 a, a:hover {
   text-decoration: none;
@@ -13,7 +11,7 @@ a, a:hover {
 }
 
 #pageHeaderTitle {
-  /* margin: 2rem 0; */
+  margin: 2rem 0;
   text-transform: uppercase;
   text-align: center;
   font-size: 2.5rem;
@@ -118,7 +116,7 @@ a, a:hover {
   width: 100px;
 }
 
-/* @media screen and (min-width: 769px) {
+@media screen and (min-width: 769px) {
   .postcard {
     flex-wrap: inherit;
   }
@@ -128,7 +126,11 @@ a, a:hover {
   .postcard .postcard__tagbox {
     justify-content: start;
   }
-
+  .postcard .postcard__img {
+    max-width: 300px;
+    max-height: 100%;
+    transition: transform 0.3s ease;
+  }
   .postcard .postcard__text {
     padding: 3rem;
     width: 100%;
@@ -145,10 +147,7 @@ a, a:hover {
   .postcard:hover .postcard__img {
     transform: scale(1.1);
   }
-  .postcard:nth-child(2n+1) {
-    flex-direction: row;
-  }
-  .postcard:nth-child(2n+0) {
+  .postcard {
     flex-direction: row-reverse;
   }
   .postcard:nth-child(2n+1) .postcard__text::before {
@@ -181,7 +180,7 @@ a, a:hover {
   .postcard.light .postcard__text:before {
     background: #e1e5ea;
   }
-} */
+}
 /* COLORS */
 .postcard .postcard__tagbox .green.play:hover {
   background: #79dd09;
@@ -265,39 +264,39 @@ a, a:hover {
   background-image: linear-gradient(30deg, rgba(189, 187, 73, 0.1), transparent 50%);
 }
 
-@media screen and (min-width: 769px) {
-  .green::before {
-    background-image: linear-gradient(-80deg, rgba(121, 221, 9, 0.1), transparent 50%);
-  }
+// @media screen and (min-width: 769px) {
+//   .green::before {
+//     background-image: linear-gradient(-80deg, rgba(121, 221, 9, 0.1), transparent 50%);
+//   }
 
-  .green:nth-child(2n)::before {
-    background-image: linear-gradient(80deg, rgba(121, 221, 9, 0.1), transparent 50%);
-  }
+//   .green:nth-child(2n)::before {
+//     background-image: linear-gradient(80deg, rgba(121, 221, 9, 0.1), transparent 50%);
+//   }
 
-  .blue::before {
-    background-image: linear-gradient(-80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-  }
+//   .blue::before {
+//     background-image: linear-gradient(-80deg, rgba(0, 118, 189, 0.1), transparent 50%);
+//   }
 
-  .blue:nth-child(2n)::before {
-    background-image: linear-gradient(80deg, rgba(0, 118, 189, 0.1), transparent 50%);
-  }
+//   .blue:nth-child(2n)::before {
+//     background-image: linear-gradient(80deg, rgba(0, 118, 189, 0.1), transparent 50%);
+//   }
 
-  .red::before {
-    background-image: linear-gradient(-80deg, rgba(189, 21, 11, 0.1), transparent 50%);
-  }
+//   .red::before {
+//     background-image: linear-gradient(-80deg, rgba(189, 21, 11, 0.1), transparent 50%);
+//   }
 
-  .red:nth-child(2n)::before {
-    background-image: linear-gradient(80deg, rgba(189, 21, 11, 0.1), transparent 50%);
-  }
+//   .red:nth-child(2n)::before {
+//     background-image: linear-gradient(80deg, rgba(189, 21, 11, 0.1), transparent 50%);
+//   }
 
-  .yellow::before {
-    background-image: linear-gradient(-80deg, rgba(189, 187, 73, 0.1), transparent 50%);
-  }
+//   .yellow::before {
+//     background-image: linear-gradient(-80deg, rgba(189, 187, 73, 0.1), transparent 50%);
+//   }
 
-  .yellow:nth-child(2n)::before {
-    background-image: linear-gradient(80deg, rgba(189, 187, 73, 0.1), transparent 50%);
-  }
-}
+//   .yellow:nth-child(2n)::before {
+//     background-image: linear-gradient(80deg, rgba(189, 187, 73, 0.1), transparent 50%);
+//   }
+// }
 
 
 
