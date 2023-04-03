@@ -17,14 +17,11 @@ Rails.application.routes.draw do
       resources :sprints, param: :slug do
         resources :tickets do
           member do
-            patch :start
-            patch :test
-            patch :done
+            patch :start,:test,:done
           end
         end
         member do
-          get :end_sprint
-          get :backlog_tickets
+          get :end_sprint, :backlog_tickets
           patch :select_sprint
         end
       end
