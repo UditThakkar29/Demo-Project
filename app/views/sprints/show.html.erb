@@ -23,7 +23,7 @@
     <div class="row",style="align-items: flex-end;">
       <h3><%= @sprint.name %></h3>
       <h5><%= @sprint.goal %></h5>
-      <p><%= @sprint.start_time %></p>
+      <p><%= @sprint.start_time.strftime("%m/%d/%Y %I:%M%p") %></p>
       <p><%= @sprint.duration %></p>
 
     </div>
@@ -64,4 +64,6 @@
     </div>
   </div>
 </div>
+
+
 
