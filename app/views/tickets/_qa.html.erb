@@ -2,7 +2,9 @@
 
 <% tickets.each do |ticket| %>
   <% if ticket.testing? %>
-    <li><%= link_to ticket.name, project_board_sprint_ticket_path(id: ticket, sprint_slug: params[:slug]) %></li>
+    <li data-bs-toggle="modal" data-bs-target="#exampleModal<%= ticket.id %>"><%=ticket.name%></li>
+      <%= render partial:'sprints/modal', locals: { ticket: ticket} %>
+
   <% end %>
 <% end %>
 

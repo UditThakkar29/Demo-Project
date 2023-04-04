@@ -19,14 +19,14 @@
       <h3>Change Status</h3>
       <% if @ticket.to_do? %>
         <p>To-Do</p>
-        <%= link_to "In Progress", start_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <%= link_to "In Progress", start_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
       <% elsif @ticket.doing? %>
         <p>In Progress</p>
-        <%= link_to "QA", test_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <%= link_to "QA", test_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
       <% elsif @ticket.testing? %>
         <p>QA</p>
-        <%= link_to "Back in progress", start_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
-        <%= link_to "Done", done_project_board_sprint_ticket_path(project_id: params[:project_id],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <%= link_to "Back in progress", start_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <%= link_to "Done", done_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
       <% else %>
         <h5>All done for this ticket</h5>
       <% end %>
@@ -43,7 +43,6 @@
   </div>
 
 </div>
-
 
 
 
