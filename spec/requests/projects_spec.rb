@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe "Projects", type: :request do
+RSpec.describe "Project", type: :request do
 
   let(:user) {create :user}
 
@@ -10,9 +10,10 @@ RSpec.describe "Projects", type: :request do
   end
 
   describe 'Get new' do
-    it "should be redirected as the user is not manager" do
+    it "should ghet new" do
       get new_project_path
       expect(response).to have_http_status(200)
     end
   end
+
 end
