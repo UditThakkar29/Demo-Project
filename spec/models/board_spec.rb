@@ -13,4 +13,11 @@ RSpec.describe Board, type: :model do
     end
   end
 
+  describe 'valid board' do
+    let(:board) { build :board }
+    it 'should be valid board' do
+      expect(board.valid?).to eq(true)
+    end
+  end
+
 end
