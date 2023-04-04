@@ -17,9 +17,17 @@ RSpec.describe Sprint, type: :model do
       sprint = create(:sprint,current_sprint: true)
       expect(Sprint.current_sprint).to include(sprint)
     end
-    it 'not current sprint' do
+    it 'is not current sprint' do
       sprint = create(:sprint)
       expect(Sprint.current_sprint).to_not include(sprint)
+    end
+    it 'is backlog sprint' do
+      sprint = create(:sprint,backlog_sprint: true)
+      expect(Sprint.backlog_sprint).to include(sprint)
+    end
+    it 'is not backlog sprint' do
+      sprint = create(:sprint)
+      expect(Sprint.backlog_sprint).to_not include(sprint)
     end
   end
 

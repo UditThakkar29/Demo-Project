@@ -5,6 +5,7 @@ FactoryBot.define do
     duration { Faker::Number.number(digits: 1) }
     goal { Faker::Lorem.sentence(word_count: 5) }
     current_sprint { false }
+    backlog_sprint { false }
     board
   end
 end
