@@ -30,6 +30,7 @@ Rails.application.routes.draw do
     resources :invitations, only: %i[new create]
     member do
       get 'remove_users'
+      post 'invite_user'
     end
   end
 
