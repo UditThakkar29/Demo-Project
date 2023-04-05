@@ -58,8 +58,9 @@ class ProjectsController < ApplicationController
     @project = current_user.projects.friendly.find_by_slug(params[:slug])
     @email = params[:user][:email]
     # debugger
-    ProjectMailer.invite_email(email: @email, project: @project).deliver_now
-    redirect_to @project
+    mail = ProjectMailer.invite_email(email: @email, project: @project).deliver_now
+    # mail
+    redirect_to @project, notice: 'Email Sent'
   end
 
   private

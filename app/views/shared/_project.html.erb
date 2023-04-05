@@ -31,8 +31,8 @@
       <input class="group-url w-50 mb-4" id="cb-link-field" type="text" value="<%= new_project_invitation_url(@project,project_slug: params[:slug]) %>">
       <h4> Add User using email</h4>
       <%= form_for :user, url: invite_user_project_path(@project) do |form|  %>
-        <%# <p> Select from existing user</p> %>
-        <%#= form.select(:email, options_for_select(User.all.collect { |u| [ u.email, u.email] unless (u.has_role? :manager or @project.users.include?(u)) }.compact),{:class => "form-select"},:selected => "Email" ) %><br>
+        <p> Select from existing user</p>
+        <%#= form.select(:email, options_for_select(User.all.collect { |u| [ u.email] unless (u.has_role? :manager or @project.users.include?(u)) }.compact),{:class => "form-select"},:selected => "Email" ) %>
         <%# <p class="mt-2"> Invite a new user </p> %>
         <%= form.label :email %><br>
         <%= form.email_field :email %><br>
