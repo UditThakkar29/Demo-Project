@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_by_slug, only: [:show,:edit,:update,:destroy,:remove_users]
+  before_action :find_by_slug, only: %i[show edit update destroy remove_users]
   def index
     @projects = Project.all
   end
@@ -50,6 +50,15 @@ class ProjectsController < ApplicationController
     # @project
     id = params[:user]
     @project.users.delete(User.find(id))
+    redirect_to @project
+  end
+
+  def invite_user
+    # @value = new_project_invitation_url(@project)
+    @project = current_user.projects.friendly.find_by_slug(params[:slug])
+    @email = params[:user][:email]
+    # debugger
+    ProjectMailer.invite_email(email: @email, project: @project).deliver_now
     redirect_to @project
   end
 

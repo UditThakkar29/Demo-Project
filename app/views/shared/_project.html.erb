@@ -28,7 +28,16 @@
     <%#= link_to "Invite user", new_project_invitation_path(@project), class: "btn btn-outline-primary" %>
     <% if current_user.has_role? :manager %>
       <h3 class="text-success">Invite</h3>
-      <input class="group-url w-50" id="cb-link-field" type="text" value="<%= new_project_invitation_url(@project) %>">
+      <input class="group-url w-50 mb-4" id="cb-link-field" type="text" value="<%= new_project_invitation_url(@project,project_slug: params[:slug]) %>">
+      <h4> Add User using email</h4>
+      <%= form_for :user, url: invite_user_project_path(@project) do |form|  %>
+        <%# <p> Select from existing user</p> %>
+        <%#= form.select(:email, options_for_select(User.all.collect { |u| [ u.email, u.email] unless (u.has_role? :manager or @project.users.include?(u)) }.compact),{:class => "form-select"},:selected => "Email" ) %><br>
+        <%# <p class="mt-2"> Invite a new user </p> %>
+        <%= form.label :email %><br>
+        <%= form.email_field :email %><br>
+        <%= form.submit %>
+      <% end %>
     <% end %>
   </div>
 </div>
