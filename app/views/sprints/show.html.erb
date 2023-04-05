@@ -30,40 +30,62 @@
     <%#= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_id: @sprint), class: "btn btn-primary" %>
     <div class="row">
       <section class="lists-container">
-      <div class="list">
-        <h3 class="list-title">To Do</h3>
-        <ul class="list-items">
-          <%= render "tickets/to-do", tickets: @sprint.tickets %>
-        </ul>
-        <%= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_slug: params[:slug]), class: "add-card-btn btn btn-info", style:"color: black" %>
-        <%# <button class="add-card-btn btn">Add a card</button> %>
-      </div>
-      <div class="list">
-        <h3 class="list-title">In Progress</h3>
-        <ul class="list-items">
-          <%= render "tickets/progress", tickets: @sprint.tickets %>
-        </ul>
-        <%# <button class="add-card-btn btn">Add a card</button> %>
-      </div>
-      <div class="list">
-        <h3 class="list-title">QA</h3>
-        <ul class="list-items">
-          <%= render "tickets/qa", tickets: @sprint.tickets %>
-        </ul>
-        <%# <button class="add-card-btn btn">Add a card</button> %>
-      </div>
-      <div class="list">
-        <h3 class="list-title">Done</h3>
-        <ul class="list-items">
-          <%= render "tickets/done", tickets: @sprint.tickets %>
-        </ul>
-        <%# <button class="add-card-btn btn">Add a card</button> %>
-      </div>
+        <div class="list">
+          <h3 class="list-title">To Do</h3>
+          <ul class="list-items">
+            <%= render "tickets/to-do", tickets: @sprint.tickets %>
+          </ul>
+          <%= link_to "Create Ticket", new_project_board_sprint_ticket_path(sprint_slug: params[:slug]), class: "add-card-btn btn btn-info", style:"color: black" %>
+          <%# <button class="add-card-btn btn">Add a card</button> %>
+        </div>
+        <div class="list">
+          <h3 class="list-title">In Progress</h3>
+          <ul class="list-items">
+            <%= render "tickets/progress", tickets: @sprint.tickets %>
+          </ul>
+          <%# <button class="add-card-btn btn">Add a card</button> %>
+        </div>
+        <div class="list">
+          <h3 class="list-title">QA</h3>
+          <ul class="list-items">
+            <%= render "tickets/qa", tickets: @sprint.tickets %>
+          </ul>
+          <%# <button class="add-card-btn btn">Add a card</button> %>
+        </div>
+        <div class="list">
+          <h3 class="list-title">Done</h3>
+          <ul class="list-items">
+            <%= render "tickets/done", tickets: @sprint.tickets %>
+          </ul>
+          <%# <button class="add-card-btn btn">Add a card</button> %>
+        </div>
 
-    </section>
+      </section>
     </div>
+
+    <div class="row">
+      <div style="text-align: center;">
+      <button data-bs-toggle="modal" data-bs-target="#chatModal", class= "btn btn-primary">Live chat</button>
+      </div>
+    </div>
+
   </div>
 </div>
+
+
+<div class="modal fade" id="chatModal" tabindex="-1" aria-labelledby="chatModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+
+        </div>
+      </div>
+    </div>
+</div>
+
 
 
 
