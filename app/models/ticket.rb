@@ -8,6 +8,7 @@ class Ticket < ApplicationRecord
 
   validates :name, presence: true
   validates :summary, presence: true
+  validates :story_point, presence: true
 
   aasm column: 'status', whiny_transitions: false do
     state :to_do, initial: true

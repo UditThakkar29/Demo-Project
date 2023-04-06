@@ -18,6 +18,8 @@ class TicketsController < ApplicationController
     @ticket = Ticket.create(ticket_params)
     if @ticket.save
       @ticket.sprint_tickets.create(sprint: @sprint)
+      @sprint.total_story_points += @ticket.story_point
+      @sprint.save
       if @sprint.backlog_sprint == true
         redirect_to backlog_tickets_project_board_sprint_path(slug: @sprint)
       else
@@ -80,6 +82,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name, :summary, :priority, :status, :reporter_id, :assigned_user_id)
+    params.require(:ticket).permit(:name, :summary, :priority, :status, :reporter_id, :assigned_user_id,:story_point)
   end
 end

@@ -15,6 +15,7 @@
     <% else %>
     <p class="text-primary"><strong style="color: black;">Priority </strong>: Low</p>
     <% end %>
+    <p><strong style="color: black;">Story Point </strong>: <%= @ticket.story_point %></p>
     <% if @sprint.backlog_sprint.nil? %>
       <h3>Change Status</h3>
       <% if @ticket.to_do? %>

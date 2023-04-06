@@ -17,6 +17,7 @@
           <% else %>
           <p class="text-primary"><strong style="color: black;">Priority </strong>: Low</p>
           <% end %>
+          <p><strong style="color: black;">Story Point </strong>: <%= ticket.story_point %></p>
 
           <% if @sprint.backlog_sprint.nil? %>
             <h3>Change Status</h3>
@@ -35,7 +36,7 @@
             <% end %>
             <br>
             <% if ticket.assigned_user_id %>
-              <%= link_to "Change  Assigned User", edit_project_board_sprint_ticket_path(ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug]), class:"btn btn-outline-primary" %>
+              <%= link_to "Change  Assigned User", edit_project_board_sprint_ticket_path(id:ticket,project_slug: params[:project_slug],board_slug:params[:board_slug],sprint_slug: params[:slug]), class:"btn btn-outline-primary" %>
             <% else %>
               <%= link_to "Assign Ticket to any user", edit_project_board_sprint_ticket_path(ticket,project_slug: params[:project_slug],sprint_slug:params[:slug],board_slug:params[:board_slug]), class:"btn btn-primary" %>
             <% end %>
@@ -43,7 +44,7 @@
             <h5>Assign Ticket to active sprint</h5>
             <%= link_to "Current Sprint", add_to_current_sprint_project_board_sprint_ticket_path(ticket,sprint_slug:params[:sprint_slug],project_slug: params[:project_slug],board_slug:params[:board_slug]), class:"btn btn-outline-primary" %>
           <% end %>
-          
+
         </div>
       </div>
     </div>

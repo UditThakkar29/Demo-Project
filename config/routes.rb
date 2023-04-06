@@ -22,7 +22,7 @@ Rails.application.routes.draw do
           end
         end
         member do
-          get :end_sprint, :backlog_tickets
+          get :end_sprint, :backlog_tickets, :sprint_report
           patch :select_sprint
         end
       end

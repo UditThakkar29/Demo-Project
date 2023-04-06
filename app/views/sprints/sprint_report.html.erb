@@ -1,0 +1,38 @@
+<div class="d-flex">
+  <div>
+    <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+      <div class="card mt-2 ms-2">
+      <h3 class="text-center"><%= @project.name%></h3>
+      </div>
+      <div class="position-sticky">
+        <div class="list-group list-group-flush mx-3 mt-2">
+          <%= link_to "Back to Board", project_boards_path(id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All Sprints", project_board_sprints_path(board_id: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "End Sprint", end_sprint_project_board_sprint_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <a href="" class="list-group-item list-group-item-action py-2 ripple">
+            <span>#</span>
+          </a>
+        </div>
+      </div>
+    </nav>
+  </div>
+
+  <div class="ms-5 mt-2" style="width: 80%;">
+
+    <div class="row",style="align-items: flex-end;">
+      <h3><%= @sprint.name %></h3>
+      <h5><%= @sprint.goal %></h5>
+      <p><%= @sprint.start_time.strftime("%m/%d/%Y %I:%M%p") %></p>
+      <p><%= @sprint.duration %></p>
+
+    </div>
+  <hr>
+    <p>Total Sprint Points: <%= @sprint.total_story_points %></p>
+    <% if @sprint.completed_story_points.nil? %>
+      <p>Completed Sprint Points: 0</p>
+    <% else %>
+      <p>Completed Sprint Points: <%= @sprint.completed_story_points %></p>
+    <% end %>
+  </div>
+</div>
