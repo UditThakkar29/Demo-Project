@@ -11,7 +11,7 @@ RSpec.describe User, type: :model do
     end
 
     it 'should be assigned a default role' do
-      expect(user1.has_role? :manager).to eq(true)
+      expect(user1.has_role? :user).to eq(true)
     end
   end
 end

@@ -28,5 +28,15 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/CanCanCommunity/cancancan/blob/develop/docs/define_check_abilities.md
+    # can :create, Project if user.has_role? :manager
+    # can :read, Project
+
+    if user.has_role? :manager
+      # can :manage, Project
+      # can :create, Project
+      can :manage, :all
+    elsif user.has_role? :user
+      can :read, :all
+    end
   end
 end
