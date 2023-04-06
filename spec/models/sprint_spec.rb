@@ -9,6 +9,7 @@ RSpec.describe Sprint, type: :model do
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of :start_time }
+    # it { is_expected.not_to validate_presence_of :start_time }
     it { is_expected.to validate_presence_of :goal }
   end
 

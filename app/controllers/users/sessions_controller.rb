@@ -10,8 +10,8 @@ class Users::SessionsController < Devise::SessionsController
 
   def create
     @project = Project.friendly.find_by_slug(params[:user][:slug])
-    add_user_to_project
     super
+    add_user_to_project
   end
 
   # POST /resource/sign_in
