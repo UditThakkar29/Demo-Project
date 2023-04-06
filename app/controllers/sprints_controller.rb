@@ -3,7 +3,7 @@
 # Controller for sprint
 class SprintsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_by_slug, only: %i[show new create end_sprint backlog_tickets]
+  before_action :find_by_slug, only: %i[show new create end_sprint backlog_tickets sprint_report]
   before_action :can_be_ended, only: %i[end_sprint]
   before_action :find_sprints, only: %i[select_sprint]
 
@@ -23,6 +23,8 @@ class SprintsController < ApplicationController
     if Sprint.where(current_sprint: true).count == 0 and Sprint.name!="Backlog"
       @sprint.current_sprint = true
     end
+    @sprint.total_story_points = 0
+    @sprint.completed_story_points = 0
 
     if @sprint.save
       redirect_to project_board_sprint_path(slug: @sprint)
@@ -37,9 +39,13 @@ class SprintsController < ApplicationController
 
   def select_sprint
     @tickets = []
-
     @previous_sprint.tickets.each do |ticket|
       @tickets << ticket if ticket.status != 'done'
+      if ticket.status == 'done'
+        @previous_sprint.completed_story_points += ticket.story_point
+        @previous_sprint.save
+        debugger
+      end
     end
 
     @tickets.each do |ticket|
@@ -47,11 +53,14 @@ class SprintsController < ApplicationController
       ticket.reset!
     end
     update_state
-    redirect_to project_board_sprint_path(slug: params[:slug])
+    redirect_to sprint_report_project_board_sprint_path(slug: @previous_sprint)
   end
 
   def backlog_tickets
     @sprint = Sprint.friendly.find_by_slug(params[:slug])
+  end
+
+  def sprint_report
   end
 
   private
