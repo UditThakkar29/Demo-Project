@@ -11,7 +11,9 @@ Rails.application.routes.draw do
   # end
 
   get 'confirmation_pending' => 'main#after_registration_path'
-
+  authenticate :user, lambda { |u| u.has_role? :manager } do
+    mount Flipper::UI.app(Flipper) => '/flipper'
+  end
   resources :projects, param: :slug do
     resources :boards, param: :slug do
       resources :sprints, param: :slug do

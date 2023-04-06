@@ -68,3 +68,6 @@ gem 'faker'
 gem 'responders'
 gem 'jquery-rails'
 gem 'shoulda-matchers'
+
+gem "flipper-active_record", "~> 0.28.0"
+gem "flipper-ui", "~> 0.28.0"
