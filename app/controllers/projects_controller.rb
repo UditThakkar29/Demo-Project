@@ -1,4 +1,5 @@
 class ProjectsController < ApplicationController
+  load_and_authorize_resource
   before_action :authenticate_user!
   before_action :find_by_slug, only: %i[show edit update destroy remove_users]
   def index
@@ -10,10 +11,11 @@ class ProjectsController < ApplicationController
 
   def new
     @project = Project.new
+    #   authorize! :create, @project
   end
 
   def create
-    @project = current_user.projects.create(project_params)
+    @project = current_user.projects.create(project_params) if current_user.has_role? (:manager)
 
     if @project.save
       redirect_to @project, notice: "Project was successfully created."
@@ -43,7 +45,7 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
-    redirect_to projects_path
+    # redirect_to projects_path
   end
 
   def remove_users

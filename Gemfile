@@ -71,3 +71,4 @@ gem 'shoulda-matchers'
 
 gem "flipper-active_record", "~> 0.28.0"
 gem "flipper-ui", "~> 0.28.0"
+gem 'rails-controller-testing'

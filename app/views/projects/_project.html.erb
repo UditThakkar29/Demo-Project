@@ -1,0 +1,29 @@
+
+
+
+<h5 class="card-title"><%= project.name %></h5>
+<p class="card-text"><%= project.description %></p>
+<% project.users.each do |user| %>
+  <% if user.has_role? (:manager) %>
+    <h6> Manager of the project is</h6>
+    <p><%= user.email %></p><br>
+  <% end %>
+<% end %>
+<%= link_to "Show", project_path(project),class: "align-self-end btn btn-primary mt-4", style: "bottom: 10px;" %>
+<%= link_to 'Delete', project_path(project),class: "align-self-end btn btn-primary mt-4", method: :delete,remote: true, id: "delete_btn"+project.slug.to_s %>
+
+
+<script>
+  deleteBtn = document.querySelector(`#delete_btn` + "<%= project.slug %>")
+   deleteBtn.addEventListener("click", (e) => {
+
+    deleteUrl = "projects/" + "<%=project.slug %>";
+     e.target.parentElement.parentElement.remove();
+
+    Rails.ajax({
+      url: deleteUrl,
+      type: "delete",
+    });
+   });
+
+</script>

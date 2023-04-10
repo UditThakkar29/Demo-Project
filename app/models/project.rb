@@ -22,7 +22,7 @@ class Project < ApplicationRecord
   private
 
   def create_board
-    Project.last.build_board(name: "#{Project.last.name}-Board").save
+    build_board(name: "#{Project.last.name}-Board").save
   end
 
   # def delete_board

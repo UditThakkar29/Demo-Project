@@ -4,6 +4,10 @@ FactoryBot.define do
     password {"password1"}
     password_confirmation {"password1"}
 
-    after(:create) {|user| user.add_role(:manager)}
+    after(:create) {|user| user.add_role(:user)}
+
+    trait :manager do
+      after(:create) {|user| user.add_role(:manager)}
+    end
   end
 end
