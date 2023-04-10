@@ -2,7 +2,7 @@
 
 # Controller for tickets
 class TicketsController < ApplicationController
-  before_action :find_by_slug, only: %i[show new create edit]
+  before_action :find_by_slug, only: %i[show new create edit ticket_history]
   before_action :find_by_slug_aasm, only: %i[start test done]
 
   def show
@@ -66,6 +66,16 @@ class TicketsController < ApplicationController
     ticket.sprints.destroy_all
     ticket.sprint_tickets.create(sprint: active_sprint)
     redirect_to project_board_sprint_path(slug: active_sprint)
+  end
+
+  def ticket_history
+    @ticket = Ticket.find(params[:id])
+    @sprint_tickets = @ticket.sprint_tickets
+    @sprints = []
+    @sprint_tickets.each do |st|
+      sprint = Sprint.find(st.sprint_id)
+      @sprints << sprint
+    end
   end
 
   private

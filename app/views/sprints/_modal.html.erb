@@ -35,6 +35,7 @@
               <h5>All done for this ticket</h5>
             <% end %>
             <br>
+            <%= link_to "Ticket history", ticket_history_project_board_sprint_ticket_path(id:ticket,sprint_slug: params[:slug]),class:"btn btn-primary mb-3" %><br>
             <% if ticket.assigned_user_id %>
               <%= link_to "Change  Assigned User", edit_project_board_sprint_ticket_path(id:ticket,project_slug: params[:project_slug],board_slug:params[:board_slug],sprint_slug: params[:slug]), class:"btn btn-outline-primary" %>
             <% else %>
