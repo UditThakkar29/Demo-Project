@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
-  before_action :find_by_slug, only: %i[show edit update destroy remove_users]
+  before_action :find_by_slug, only: %i[show edit update destroy remove_users report]
   def index
     @projects = Project.all
   end
@@ -48,6 +48,7 @@ class ProjectsController < ApplicationController
     # redirect_to projects_path
   end
 
+
   def remove_users
     # @project
     id = params[:user]
@@ -63,6 +64,10 @@ class ProjectsController < ApplicationController
     mail = ProjectMailer.invite_email(email: @email, project: @project).deliver_now
     # mail
     redirect_to @project, notice: 'Email Sent'
+  end
+
+  def report
+    # redirect_to @project
   end
 
   private

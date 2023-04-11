@@ -11,6 +11,8 @@ Rails.application.routes.draw do
   # end
 
   get 'confirmation_pending' => 'main#after_registration_path'
+  post 'checkout/create', to: 'checkouts#create'
+  get 'checkout/success', to: 'checkouts#success'
   authenticate :user, lambda { |u| u.has_role? :manager } do
     mount Flipper::UI.app(Flipper) => '/flipper'
   end
@@ -31,7 +33,7 @@ Rails.application.routes.draw do
     end
     resources :invitations, only: %i[new create]
     member do
-      get 'remove_users'
+      get 'remove_users', :report
       post 'invite_user'
     end
   end
