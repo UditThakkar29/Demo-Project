@@ -14,7 +14,7 @@ class CheckoutsController < ApplicationController
     #       success_url: checkout_success_url
     #     )
     @session = Stripe::Checkout::Session.create({
-      success_url: checkout_success_url,
+      success_url: checkout_success_url+ "?session_id={CHECKOUT_SESSION_ID}",
       customer_email: current_user.email,
       line_items: [
         {price: 'price_1MveFuSBcixxUaoPIGm6Vseq', quantity: 1},
@@ -28,9 +28,14 @@ class CheckoutsController < ApplicationController
   end
 
   def success
-    debugger
     @session = Stripe::Checkout::Session.retrieve(params[:session_id])
     @line_items = Stripe::Checkout::Session.list_line_items(params[:session_id])
+    puts @line_items.inspect
+    debugger
+    if @session.status == "complete"
+      plan = Plan.find_by(key: @line_items.data[0].price.product)
+      current_user.build_subscription(subscription_status: "active", subsciption_start_date: DateTime.now.to_date, subscription_end_date: DateTime.now.next_day(30).to_date,plan_id: plan.id).save
+    end
 
   end
 end
