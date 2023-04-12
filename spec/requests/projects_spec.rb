@@ -1,19 +1,18 @@
 require 'rails_helper'
 
 RSpec.describe "Project", type: :request do
-
-  let(:user) {create :user, :manager}
-
-  before do
-    user.confirm
-    sign_in user
-  end
   before(:all) do
     @project = Project.create(name:"Project",description:"desc")
   end
 
   describe 'Get new' do
-    it "should ghet new" do
+    let(:user) {create :user, :manager}
+    before do
+      user.confirm
+      sign_in user
+    end
+
+    it "should get new" do
       get new_project_path
       expect(response).to have_http_status(200)
     end
@@ -25,13 +24,14 @@ RSpec.describe "Project", type: :request do
       user1.confirm
       sign_in user1
     end
+    it {debugger}
     let(:project) {create :project}
     it "should not get new" do
       response = get new_project_path
       expect(response).to eq(302)
-      expect {
-        get new_project_path
-      }.to eq(:success)
+      # expect {
+      #   get new_project_path
+      # }.to eq(:success)
     end
   end
 

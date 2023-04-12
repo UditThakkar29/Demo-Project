@@ -9,16 +9,14 @@
         <div class="list-group list-group-flush mx-3 mt-2">
           <%= link_to "Current Project", project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
           <%= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
-          <%= link_to "Reports", report_project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <% if current_user.has_role? :manager %>
+            <%= link_to "Reports", report_project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
+          <% end %>
           <%= link_to "Create Sprint", new_project_board_sprint_path(board_slug: @board), class: "list-group-item list-group-item-action py-2 ripple" %>
-          <a href="" class="list-group-item list-group-item-action py-2 ripple">
-            <span>#</span>
-          </a>
         </div>
       </div>
     </nav>
   </div>
-
   <%#= render "shared/sprints", sprints: @sprints %>
   <%= render partial: "shared/sprints", locals: {sprints: @sprints, backlog: @backlog}%>
 

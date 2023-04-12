@@ -19,17 +19,24 @@ class User < ApplicationRecord
     self.add_role(:user) if self.roles.blank?
   end
 
-  # def stripe_attributes(pay_customer)
-  #   {
-  #     address: {
-  #       city: pay_customer.owner.city,
-  #       country: pay_customer.owner.country
-  #     },
-  #     metadata: {
-  #       pay_customer_id: pay_customer.id,
-  #       user_id: id
-  #     }
-  #   }
-  # end
+  def check_subsciption_status
+    subscription =  Stripe::Subscription.retrieve(self.subscription.subscription_key)
+    return if subscription.nil?
+    self.subscription.update(
+      subscription_status: subscription.status,
+      subscription_end_date: Time.at(subscription.current_period_end).to_date,
+      subsciption_start_date: Time.at(subscription.current_period_start).to_date
+    )
+  end
 
+  def active_subscription?
+
+    check_subsciption_status if self.subscription&.subscription_end_date.nil? || self.subscription&.subscription_end_date.to_date < Time.now.to_date
+    if self.subscription.nil? or self.subscription&.subscription_end_date.to_date < Time.now.to_date
+      return false
+    else
+      return true
+    end
+
+  end
 end

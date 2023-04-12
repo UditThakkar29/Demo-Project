@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   # end
 
   get 'confirmation_pending' => 'main#after_registration_path'
+  get 'checkout/show', to: 'checkouts#show'
   post 'checkout/create', to: 'checkouts#create'
   get 'checkout/success', to: 'checkouts#success'
   authenticate :user, lambda { |u| u.has_role? :manager } do

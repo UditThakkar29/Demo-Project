@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :authenticate_user!
   before_action :find_by_slug, only: %i[show edit update destroy remove_users report]
+  before_action :check_subsciption, only: %i[report]
   def index
     @projects = Project.all
   end
@@ -71,6 +72,13 @@ class ProjectsController < ApplicationController
   end
 
   private
+
+  def check_subsciption
+    # debugger
+    unless current_user.active_subscription?
+      redirect_to checkout_show_path, alert: "You don't have a subscription or you subscription expired."
+    end
+  end
 
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:slug])

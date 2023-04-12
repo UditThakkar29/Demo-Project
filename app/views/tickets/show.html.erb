@@ -1,50 +1,54 @@
 <div class="d-flex">
   <%= render "navbar" %>
+  <div class="card mt-2 ms-2 bg-light" style="width: 80%;" >
+    <div class="ms-5 mt-2 mb-2" style="width: 40%;">
+      <h2 ><%= @ticket.name %> </h2>
 
-  <div class="ms-5 mt-2" style="width: 80%;">
-    <h2 ><%= @ticket.name %> </h2>
-
-    <p style="strong"><%= @ticket.summary %></p>
-    <% if @ticket.assigned_user_id != nil %>
-      <p><strong>Assigned to:</strong> <%= User.find(@ticket.assigned_user_id).email %></p>
-    <% end %>
-    <% if @ticket.priority== "High"%>
-      <p class="text-danger"> <strong style="color: black;">Priority </strong>: High</p>
-    <% elsif @ticket.priority== "Medium" %>
-      <p class="text-warning-emphasis"><strong style="color: black;">Priority </strong>: Medium</p>
-    <% else %>
-    <p class="text-primary"><strong style="color: black;">Priority </strong>: Low</p>
-    <% end %>
-    <p><strong style="color: black;">Story Point </strong>: <%= @ticket.story_point %></p>
-    <% if @sprint.backlog_sprint.nil? %>
-      <h3>Change Status</h3>
-      <% if @ticket.to_do? %>
-        <p>To-Do</p>
-        <%= link_to "In Progress", start_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
-      <% elsif @ticket.doing? %>
-        <p>In Progress</p>
-        <%= link_to "QA", test_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
-      <% elsif @ticket.testing? %>
-        <p>QA</p>
-        <%= link_to "Back in progress", start_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
-        <%= link_to "Done", done_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
-      <% else %>
-        <h5>All done for this ticket</h5>
+      <p style="strong"><%= @ticket.summary %></p>
+      <% if @ticket.assigned_user_id != nil %>
+        <p><strong>Assigned to:</strong> <%= User.find(@ticket.assigned_user_id).email %></p>
       <% end %>
-      <br>
-      <%= link_to "Ticket history", ticket_history_project_board_sprint_ticket_path(id:@ticket,slug: params[:slug]),class:"btn btn-primary mb-3" %><br>
-      <% if @ticket.assigned_user_id %>
-        <%= link_to "Change  Assigned User", edit_project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug]), class:"btn btn-outline-primary" %>
+      <% if @ticket.priority== "High"%>
+        <p class="text-danger"> <strong style="color: black;">Priority </strong>: High</p>
+      <% elsif @ticket.priority== "Medium" %>
+        <p class="text-warning-emphasis"><strong style="color: black;">Priority </strong>: Medium</p>
       <% else %>
-        <%= link_to "Assign Ticket to any user", edit_project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug]), class:"btn btn-primary" %>
+      <p class="text-primary"><strong style="color: black;">Priority </strong>: Low</p>
       <% end %>
-    <% else %>
-      <h5>Assign Ticket to active sprint</h5>
-      <%= link_to "Current Sprint", add_to_current_sprint_project_board_sprint_ticket_path(@ticket,sprint_slug:params[:sprint_slug],project_slug: params[:project_slug],board_slug:params[:board_slug]), class:"btn btn-outline-primary" %>
-    <% end %>
+      <p><strong style="color: black;">Story Point </strong>: <%= @ticket.story_point %></p>
+    </div>
+    <div class="ms-5 mt-2 mb-2" style="width: 40%;">
+      <% if @sprint.backlog_sprint.nil? %>
+        <h3>Change Status</h3>
+        <% if @ticket.to_do? %>
+          <p>To-Do</p>
+          <%= link_to "In Progress", start_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <% elsif @ticket.doing? %>
+          <p>In Progress</p>
+          <%= link_to "QA", test_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <% elsif @ticket.testing? %>
+          <p>QA</p>
+          <%= link_to "Back in progress", start_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+          <%= link_to "Done", done_project_board_sprint_ticket_path(project_slug: params[:project_slug],id: @ticket),method: :patch, class:"btn btn-primary mb-4" %>
+        <% else %>
+          <h5>All done for this ticket</h5>
+        <% end %>
+        <br>
+        <%= link_to "Ticket history", ticket_history_project_board_sprint_ticket_path(id:@ticket,slug: params[:slug]),class:"btn btn-primary mb-3" %><br>
+        <% if @ticket.assigned_user_id %>
+          <%= link_to "Change  Assigned User", edit_project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug]), class:"btn btn-outline-primary" %>
+        <% else %>
+          <%= link_to "Assign Ticket to any user", edit_project_board_sprint_ticket_path(@ticket,project_slug: params[:project_slug],sprint_slug:params[:sprint_slug],board_slug:params[:board_slug]), class:"btn btn-primary" %>
+        <% end %>
+      <% else %>
+        <h5>Assign Ticket to active sprint</h5>
+        <%= link_to "Current Sprint", add_to_current_sprint_project_board_sprint_ticket_path(@ticket,sprint_slug:params[:sprint_slug],project_slug: params[:project_slug],board_slug:params[:board_slug]), class:"btn btn-outline-primary" %>
+      <% end %>
+    </div>
   </div>
 
 </div>
+
 
 
 
