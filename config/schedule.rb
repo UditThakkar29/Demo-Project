@@ -23,10 +23,10 @@ set :output, './log/cron.log'
 
 set :environment, "development"
 
-every 1.minutes do
-  runner "puts 'Everything is Running'"
-  runner "puts '********************************'"
-end
+# every 1.minutes do
+#   runner "puts 'Everything is Running'"
+#   runner "puts '********************************'"
+# end
 
 
 every 1.day, at: '10:30 am' do
