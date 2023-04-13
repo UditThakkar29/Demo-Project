@@ -57,6 +57,20 @@
                     </div>
                   </div>
 
+                  <div class="d-flex flex-row align-items-center mb-4 field">
+                    <div class="form-outline flex-fill mb-0">
+                      <%= f.label :username %><br />
+                      <%= f.text_field :username, autofocus: true, autocomplete: "email", class: "form-control" %>
+                    </div>
+                  </div>
+
+                  <div class="d-flex flex-row align-items-center mb-4 field">
+                    <div class="form-outline flex-fill mb-0">
+                      <%= f.label :phone %><br />
+                      <%= f.text_field :phone , autofocus: true, autocomplete: "email", class: "form-control" %>
+                    </div>
+                  </div>
+
                   <div class="d-flex flex-row align-items-center mb-4">
                     <div class="form-outline flex-fill mb-0">
                       <%= f.label :password %><br />

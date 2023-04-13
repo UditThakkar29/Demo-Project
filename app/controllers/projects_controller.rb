@@ -7,7 +7,9 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
-  def show; end
+  def show
+    # debugger
+  end
 
   def new
     @project = Project.new
@@ -43,6 +45,7 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
+    # debugger
     @project.destroy
     # redirect_to projects_path
   end
@@ -77,7 +80,12 @@ class ProjectsController < ApplicationController
   end
 
   def cancel_subscription
-    @subscription_key = current_user.subscription.subscription_key
+    subscription_key = current_user.subscription.subscription_key
+    @stripe_subscription = Stripe::Subscription.retrieve(subscription_key)
+    # debugger
+    Stripe::Subscription.cancel(@stripe_subscription.id)
+    current_user.subscription.update(subscription_status: "canceled")
+    # current_user.subscription.save
     redirect_to @project
   end
 

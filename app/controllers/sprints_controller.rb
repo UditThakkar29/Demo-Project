@@ -44,7 +44,7 @@ class SprintsController < ApplicationController
       if ticket.status == 'done'
         @previous_sprint.completed_story_points += ticket.story_point
         @previous_sprint.save
-        debugger
+        # debugger
       end
     end
 

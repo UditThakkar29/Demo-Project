@@ -65,7 +65,7 @@
           <% if user_signed_in? %>
             <%= link_to "Dashboard", dashboard_index_path,class: "btn btn-primary mb-3" %>
             <br>
-            <%= link_to "Log Out", destroy_user_session_path, method: :delete ,class: "btn btn-danger mb-3" %>
+            <%= button_to "Log Out", destroy_user_session_path, method: :delete ,class: "btn btn-danger mb-3" %>
           <% else %>
             <p class="card-text">To get started create your account by clicking on the Sign Up button</p>
             <%= link_to "Sign Up", new_user_registration_path,class: "btn btn-primary mb-3" %>
