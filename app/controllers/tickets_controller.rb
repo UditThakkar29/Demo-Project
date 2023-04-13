@@ -56,6 +56,8 @@ class TicketsController < ApplicationController
 
   def done
     @ticket.done!
+    @sprint.completed_story_points += @ticket.story_point
+    @sprint.save
     redirect_to project_board_sprint_path(slug: @sprint)
   end
 

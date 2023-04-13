@@ -7,8 +7,7 @@ class ProjectsController < ApplicationController
     @projects = Project.all
   end
 
-  def show
-  end
+  def show; end
 
   def new
     @project = Project.new
@@ -25,23 +24,22 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def edit
-  end
+  def edit;  end
 
   def update
-    @project_test = Project.new(project_params)
-    if @project_test.valid?
-      @project.slug = nil if @project.name != params[:name]
-      @project.update(project_params)
-      redirect_to @project
-    else
-      render :edit, status: :unprocessable_entity
-    end
-    # if @project.update(project_params)
+    # @project_test = Project.new(project_params)
+    # if @project_test.valid?
+    #   @project.slug = nil if @project.name != params[:name]
+    #   @project.update(project_params)
     #   redirect_to @project
     # else
     #   render :edit, status: :unprocessable_entity
     # end
+    if @project.update(project_params)
+      redirect_to @project
+    else
+      render :edit, status: :unprocessable_entity
+    end
   end
 
   def destroy
@@ -68,7 +66,14 @@ class ProjectsController < ApplicationController
   end
 
   def report
-    # redirect_to @project
+    @sprints = @project.board.sprints.where(backlog_sprint: nil)
+    @data = {}
+    @data1 = {}
+    @sprints.each do |s|
+      @data[s.name] = s.total_story_points
+      @data1[s.name] = s.completed_story_points
+    end
+    # debugger
   end
 
   private
