@@ -1,7 +1,7 @@
 class ProjectsController < ApplicationController
-  load_and_authorize_resource
   before_action :authenticate_user!
-  before_action :find_by_slug, only: %i[show edit update destroy remove_users report]
+  load_and_authorize_resource
+  before_action :find_by_slug, only: %i[show edit update destroy remove_users report cancel_subscription]
   before_action :check_subsciption, only: %i[report]
   def index
     @projects = Project.all
@@ -74,6 +74,11 @@ class ProjectsController < ApplicationController
       @data1[s.name] = s.completed_story_points
     end
     # debugger
+  end
+
+  def cancel_subscription
+    @subscription_key = current_user.subscription.subscription_key
+    redirect_to @project
   end
 
   private

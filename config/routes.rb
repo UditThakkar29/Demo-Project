@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     end
     resources :invitations, only: %i[new create]
     member do
-      get 'remove_users', :report
+      get 'remove_users', :report, :cancel_subscription
       post 'invite_user'
     end
   end

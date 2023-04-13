@@ -13,11 +13,13 @@
     </nav>
   </div>
   <div class="container">
-    <h1>Hye welcome to premium feature of reports</h1>
+    <h1 style= "display: inline-block;", class="me-5">Hye welcome to premium feature of reports</h1>
+    <%= link_to "Cancel Subscription", cancel_subscription_project_path(slug: @project),class: "btn btn-danger mb-5 mt-4 ms-5" %><br>
     <h3>Chart for Total story points</h3>
     <%= pie_chart(@data)  %>
     <h3>Chart for Completed story points</h3>
     <%= pie_chart(@data1)  %>
+
   </div>
 
 </div>
