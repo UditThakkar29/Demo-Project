@@ -50,7 +50,7 @@ class SprintsController < ApplicationController
 
     @tickets.each do |ticket|
       @current_sprint.sprint_tickets.create(ticket: ticket)
-      @current_sprint.total_story_points += ticket.story_point
+      # @current_sprint.total_story_points += ticket.story_point
       ticket.reset!
     end
     update_state
