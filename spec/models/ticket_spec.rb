@@ -9,6 +9,7 @@ RSpec.describe Ticket, type: :model do
   describe 'Validations' do
     it { is_expected.to validate_presence_of :name }
     it { is_expected.to validate_presence_of :summary }
+    it { should validate_presence_of(:story_point) }
   end
 
   describe 'AASM states check' do
