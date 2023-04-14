@@ -49,7 +49,7 @@ Rails.application.configure do
     port: 587,
     user_name: Rails.application.credentials.dig(:gmail,:email),
     password: Rails.application.credentials.dig(:gmail,:password),
-    authentication: 'plain',
+    authentication: :login,
     enable_starttls_auto: true
   }
   # Print deprecation notices to the Rails logger.

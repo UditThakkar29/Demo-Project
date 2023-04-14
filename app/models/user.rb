@@ -26,8 +26,9 @@ class User < ApplicationRecord
   end
 
   def check_subsciption_status
-    subscription =  Stripe::Subscription.retrieve(self.subscription.subscription_key)
-    return if subscription.nil?
+    stripe_key = self.subscription&.subscription_key
+    return if stripe_key.nil?
+    subscription =  Stripe::Subscription.retrieve(stripe_key)
     self.subscription.update(
       subscription_status: subscription.status,
       subscription_end_date: Time.at(subscription.current_period_end).to_date,

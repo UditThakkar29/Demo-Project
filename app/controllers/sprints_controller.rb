@@ -20,7 +20,7 @@ class SprintsController < ApplicationController
 
   def create
     @sprint = @board.sprints.create(sprint_params)
-    if Sprint.where(current_sprint: true).count == 0 and Sprint.name!="Backlog"
+    if Sprint.where(current_sprint: true).count.zero? && Sprint.name != 'Backlog'
       @sprint.current_sprint = true
     end
     @sprint.total_story_points = 0
@@ -33,9 +33,7 @@ class SprintsController < ApplicationController
     end
   end
 
-  def end_sprint
-    # before action working for the method
-  end
+  def end_sprint; end
 
   def select_sprint
     @tickets = []
@@ -61,8 +59,7 @@ class SprintsController < ApplicationController
     @sprint = Sprint.friendly.find_by_slug(params[:slug])
   end
 
-  def sprint_report
-  end
+  def sprint_report; end
 
   private
 
@@ -91,8 +88,7 @@ class SprintsController < ApplicationController
     @board.sprints.each do |sprint|
       is_present = true if sprint.current_sprint.nil? && sprint.backlog_sprint.nil?
     end
-    if flag && is_present
-    else
+    if !(flag && is_present)
       if flag == false
         redirect_to project_board_sprint_path(slug: @sprint), alert: "You cannot end sprint before it's end time"
       else
@@ -111,6 +107,6 @@ class SprintsController < ApplicationController
   end
 
   def sprint_params
-    params.require(:sprint).permit(:name, :start_time, :goal, :duration,:image)
+    params.require(:sprint).permit(:name, :start_time, :goal, :duration, :image)
   end
 end

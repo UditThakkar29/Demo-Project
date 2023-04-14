@@ -2,7 +2,7 @@
 
 # Controller for tickets
 class TicketsController < ApplicationController
-  before_action :find_by_slug, only: %i[show new create edit ticket_history]
+  before_action :find_by_slug, only: %i[show new create edit ticket_history update]
   before_action :find_by_slug_aasm, only: %i[start test done]
 
   def show
@@ -36,7 +36,10 @@ class TicketsController < ApplicationController
 
   def update
     @ticket = Ticket.find(params[:id])
+    points = @ticket.story_point
     if @ticket.update(ticket_params)
+      @sprint.total_story_points -= points
+      @sprint.total_story_points += @ticket.story_point
       redirect_to project_board_sprint_ticket_path(@ticket, project_slug: params[:project_slug],
                                                             sprint_slug: params[:sprint_slug], board_slug: params[:board_slug])
     else
@@ -94,6 +97,6 @@ class TicketsController < ApplicationController
   end
 
   def ticket_params
-    params.require(:ticket).permit(:name, :summary, :priority, :status, :reporter_id, :assigned_user_id,:story_point)
+    params.require(:ticket).permit(:name, :summary, :priority, :status, :reporter_id, :assigned_user_id, :story_point)
   end
 end

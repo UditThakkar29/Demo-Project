@@ -1,42 +1,36 @@
+# frozen_string_literal: true
+
+# Controller for handling all the action related to the project model
 class ProjectsController < ApplicationController
   before_action :authenticate_user!
   load_and_authorize_resource
-  before_action :find_by_slug, only: %i[show edit update destroy remove_users report cancel_subscription]
+  before_action :find_by_slug, except: %i[index new create]
   before_action :check_subsciption, only: %i[report]
+
   def index
     @projects = Project.all
   end
 
-  def show
-    # debugger
-  end
+  def show; end
+
 
   def new
     @project = Project.new
-    #   authorize! :create, @project
   end
 
   def create
     @project = current_user.projects.create(project_params) if current_user.has_role? (:manager)
 
     if @project.save
-      redirect_to @project, notice: "Project was successfully created."
+      redirect_to @project, notice: 'Project was successfully created.'
     else
       render :new
     end
   end
 
-  def edit;  end
+  def edit; end
 
   def update
-    # @project_test = Project.new(project_params)
-    # if @project_test.valid?
-    #   @project.slug = nil if @project.name != params[:name]
-    #   @project.update(project_params)
-    #   redirect_to @project
-    # else
-    #   render :edit, status: :unprocessable_entity
-    # end
     if @project.update(project_params)
       redirect_to @project
     else
@@ -45,26 +39,23 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    # debugger
+    @project.board.sprints.each do |s|
+      # s.tickets.each { |t| t.destroy }
+      s.tickets.each(&:destroy)
+    end
     @project.destroy
-    # redirect_to projects_path
   end
 
-
   def remove_users
-    # @project
     id = params[:user]
     @project.users.delete(User.find(id))
     redirect_to @project
   end
 
   def invite_user
-    # @value = new_project_invitation_url(@project)
-    @project = current_user.projects.friendly.find_by_slug(params[:slug])
     @email = params[:user][:email]
     # debugger
-    mail = ProjectMailer.invite_email(email: @email, project: @project).deliver_now
-    # mail
+    ProjectMailer.invite_email(email: @email, project: @project).deliver_now
     redirect_to @project, notice: 'Email Sent'
   end
 
@@ -76,7 +67,6 @@ class ProjectsController < ApplicationController
       @data[s.name] = s.total_story_points
       @data1[s.name] = s.completed_story_points
     end
-    # debugger
   end
 
   def cancel_subscription
@@ -84,8 +74,7 @@ class ProjectsController < ApplicationController
     @stripe_subscription = Stripe::Subscription.retrieve(subscription_key)
     # debugger
     Stripe::Subscription.cancel(@stripe_subscription.id)
-    current_user.subscription.update(subscription_status: "canceled")
-    # current_user.subscription.save
+    current_user.subscription.update(subscription_status: 'canceled')
     redirect_to @project
   end
 
@@ -100,9 +89,7 @@ class ProjectsController < ApplicationController
 
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:slug])
-    if @project==nil
-      raise ActiveRecord::RecordNotFound
-    end
+    raise ActiveRecord::RecordNotFound if @project.nil?
   end
 
   def project_params

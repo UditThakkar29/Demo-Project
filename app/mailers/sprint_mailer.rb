@@ -1,5 +1,5 @@
 class SprintMailer < ApplicationMailer
-  default from: 'uthakkar@grepruby.in'
+  default from: 'jeerabusiness29@gmail.com'
   layout 'mailer'
 
   def sprint_end_notification(user:,project:,sprint:)

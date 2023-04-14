@@ -1,6 +1,6 @@
 # include Rails.application.routes.url_helpers
 class ProjectMailer < ApplicationMailer
-  default from: 'uthakkar@grepruby.in'
+  default from: 'jeerabusiness29@gmail.com'
   layout 'mailer'
 
   def invite_email(email:,project:)

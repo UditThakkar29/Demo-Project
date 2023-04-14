@@ -68,6 +68,51 @@ RSpec.describe "Project", type: :request do
     end
   end
 
+  describe 'DELETE #delete' do
+    context 'with valid project' do
+      it 'deletes the project' do
+        expect do
+          delete project_path(slug: project, method: :delete)
+        end.to change(Project, :count).by(-1)
+      end
+    end
+  end
+
+  describe 'Methods' do
+    context 'remove user' do
+      it "removes a user from the project" do
+        user_to_remove = create(:user)
+        project.users << user_to_remove
+
+        expect {
+          get remove_users_project_path(slug: project.slug, user: user_to_remove.id)
+        }.to change { project.reload.users.count }.by(-1)
+      end
+    end
+
+    context 'invite_user' do
+      let(:user_to_invite)  {create(:user)}
+      it 'sends an email to the user we want to invite' do
+        expect do
+          post invite_user_project_path(slug: project.slug,"user"=>{"email"=>user.email})
+        end.to change { ActionMailer::Base.deliveries.count }.by(1)
+      end
+    end
+
+    # context 'cancel_subscription' do
+    #   let(:plan) { create(:plan) }
+    #   let(:subscription) { create(:subscription, user: user,plan: plan, subscription_end_date: 1.day.from_now) }
+
+    #   it {debugger}
+    #   it 'cancel user subscription' do
+    #     expect do
+    #       get cancel_subscription_project_path(slug: project.slug)
+    #     end.to change(user.subscription.subscription_status).by("canceled")
+    #   end
+    # end
+
+  end
+
   it 'Checks that a project can be updated' do
     @project = Project.create(name:"Project",description:"desc")
     @project.update(name: "hehe")

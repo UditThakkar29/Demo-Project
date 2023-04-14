@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   root 'main#index'
 
@@ -5,25 +7,23 @@ Rails.application.routes.draw do
     registrations: 'users/registrations',
     sessions: 'users/sessions'
   }
-  # devise_scope :user do
-  #   get '/users', to: 'devise/registrations#new'
-  #   get '/users/password', to: 'devise/passwords#new'
-  # end
 
   get 'confirmation_pending' => 'main#after_registration_path'
   get 'checkout/show', to: 'checkouts#show'
   post 'checkout/create', to: 'checkouts#create'
   get 'checkout/success', to: 'checkouts#success'
+
   authenticate :user, lambda { |u| u.has_role? :manager } do
     mount Flipper::UI.app(Flipper) => '/flipper'
   end
+
   resources :projects, param: :slug do
-    resources :boards, param: :slug do
+    resources :boards, param: :slug, only: %i[index show] do
       resources :sprints, param: :slug do
         resources :tickets do
           member do
             get :add_to_current_sprint, :ticket_history
-            patch :start,:test,:done
+            patch :start, :test, :done
           end
         end
         member do
@@ -39,5 +39,5 @@ Rails.application.routes.draw do
     end
   end
 
-  get 'dashboard/index', to: "dashboard#index"
+  get 'dashboard/index', to: 'dashboard#index'
 end

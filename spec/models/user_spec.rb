@@ -23,4 +23,49 @@ RSpec.describe User, type: :model do
     it { should validate_presence_of(:email) }
     it { should validate_presence_of(:password) }
   end
+
+  describe "#active_subscription?" do
+    let(:user) { create(:user) }
+    let(:plan) { create(:plan) }
+
+    before do
+      user.confirm
+      login_as user
+    end
+
+    context "when the user has an active subscription" do
+      let(:subscription) { create(:subscription, user: user,plan: plan, subscription_end_date: 1.day.from_now) }
+
+      before do
+        allow(user).to receive(:subscription).and_return(subscription)
+      end
+
+      it "returns true" do
+        expect(user.active_subscription?).to eq(true)
+      end
+    end
+
+    context "when the user does not have a subscription" do
+      before do
+        allow(user).to receive(:subscription).and_return(nil)
+      end
+      it "returns false" do
+        expect(user.active_subscription?).to eq(false)
+      end
+    end
+
+    context "when the user's subscription has ended" do
+      let(:subscription) { create(:subscription, user: user,plan: plan, subscription_end_date: 1.day.ago) }
+
+      before do
+        allow(user).to receive(:subscription).and_return(subscription)
+      end
+
+      it "checks the subscription status and updates the subscription end date" do
+        expect(user).to receive(:check_subsciption_status)
+        expect(user.active_subscription?).to eq(false)
+        expect(user.subscription.subscription_end_date.to_date).to eq(subscription.subscription_end_date.to_date)
+      end
+    end
+  end
 end
