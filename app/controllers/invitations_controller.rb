@@ -1,5 +1,8 @@
+# frozen_string_literal: true
+
+# Controller for handling all the action related to the user invitation
 class InvitationsController < ApplicationController
-   skip_before_action :authenticate_user!, only: :new, :raise => false
+  skip_before_action :authenticate_user!, only: :new, raise: false
   def new
     if user_signed_in?
       create
