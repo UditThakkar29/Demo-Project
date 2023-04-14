@@ -68,8 +68,12 @@ gem 'faker'
 gem 'responders'
 gem 'jquery-rails'
 gem 'shoulda-matchers'
-
+gem 'groupdate'
+gem "chartkick"
 gem "flipper-active_record", "~> 0.28.0"
 gem "flipper-ui", "~> 0.28.0"
 gem 'rails-controller-testing'
 gem 'whenever', require: false
+
+gem "stripe", "~> 8.5"
+# gem "pay", "~> 6.3"

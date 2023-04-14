@@ -1,22 +1,25 @@
+
+
 <div class="d-flex">
   <div>
     <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
       <div class="position-sticky">
         <div class="list-group list-group-flush mx-3 mt-2">
           <%= link_to "Current Project", project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
-          <%= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
+          <%#= link_to "All projects", projects_path, class: "list-group-item list-group-item-action py-2 ripple" %>
           <%= link_to "Goto Board", project_boards_path(project_slug: params[:slug]), class: "list-group-item list-group-item-action py-2 ripple" %>
-          <% if current_user.has_role? :manager %>
-            <%= link_to "Reports", report_project_path(@project), class: "list-group-item list-group-item-action py-2 ripple" %>
-          <% end %>
-          <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-            <span>#</span>
-          </a>
         </div>
       </div>
     </nav>
   </div>
-  <%= render "shared/project" %>
+  <div class="container">
+    <h1 style= "display: inline-block;", class="me-5">Hye welcome to premium feature of reports</h1>
+    <%= link_to "Cancel Subscription", cancel_subscription_project_path(slug: @project),class: "btn btn-danger mb-5 mt-4 ms-5" %><br>
+    <h3>Chart for Total story points</h3>
+    <%= pie_chart(@data)  %>
+    <h3>Chart for Completed story points</h3>
+    <%= pie_chart(@data1)  %>
 
+  </div>
 
 </div>

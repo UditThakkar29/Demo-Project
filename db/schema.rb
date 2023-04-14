@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2023_04_06_085600) do
+ActiveRecord::Schema.define(version: 2023_04_13_123554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,12 @@ ActiveRecord::Schema.define(version: 2023_04_06_085600) do
     t.index ["feature_key", "key", "value"], name: "index_flipper_gates_on_feature_key_and_key_and_value", unique: true
   end
 
+  create_table "plans", force: :cascade do |t|
+    t.string "key"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "projects", force: :cascade do |t|
     t.string "name"
     t.text "description"
@@ -124,6 +130,19 @@ ActiveRecord::Schema.define(version: 2023_04_06_085600) do
     t.index ["slug"], name: "index_sprints_on_slug", unique: true
   end
 
+  create_table "subscriptions", force: :cascade do |t|
+    t.string "subscription_status"
+    t.datetime "subscription_end_date"
+    t.datetime "subsciption_start_date"
+    t.bigint "user_id", null: false
+    t.bigint "plan_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.string "subscription_key"
+    t.index ["plan_id"], name: "index_subscriptions_on_plan_id"
+    t.index ["user_id"], name: "index_subscriptions_on_user_id"
+  end
+
   create_table "tickets", force: :cascade do |t|
     t.string "name"
     t.text "summary"
@@ -153,6 +172,10 @@ ActiveRecord::Schema.define(version: 2023_04_06_085600) do
     t.string "unconfirmed_email"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "city"
+    t.string "country"
+    t.string "phone"
+    t.string "username"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
@@ -173,4 +196,6 @@ ActiveRecord::Schema.define(version: 2023_04_06_085600) do
   add_foreign_key "sprint_tickets", "sprints"
   add_foreign_key "sprint_tickets", "tickets"
   add_foreign_key "sprints", "boards"
+  add_foreign_key "subscriptions", "plans"
+  add_foreign_key "subscriptions", "users"
 end

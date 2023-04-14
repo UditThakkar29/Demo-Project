@@ -14,4 +14,13 @@ RSpec.describe User, type: :model do
       expect(user1.has_role? :user).to eq(true)
     end
   end
+  describe "associations" do
+    it { should have_and_belong_to_many(:projects) }
+    it { should have_one(:subscription) }
+  end
+
+  describe "validations" do
+    it { should validate_presence_of(:email) }
+    it { should validate_presence_of(:password) }
+  end
 end

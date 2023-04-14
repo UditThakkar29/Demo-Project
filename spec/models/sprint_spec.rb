@@ -5,11 +5,11 @@ RSpec.describe Sprint, type: :model do
     it { should belong_to(:board) }
     it { should have_many(:sprint_tickets).dependent(:destroy) }
     it { should have_many(:tickets).through(:sprint_tickets) }
+    it { should have_one_attached(:image) }
   end
 
   describe 'Validations' do
     it { is_expected.to validate_presence_of :start_time }
-    # it { is_expected.not_to validate_presence_of :start_time }
     it { is_expected.to validate_presence_of :goal }
   end
 

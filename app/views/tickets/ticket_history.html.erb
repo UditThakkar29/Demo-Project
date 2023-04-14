@@ -2,14 +2,20 @@
   <%= render "navbar" %>
 
   <div class="ms-5 mt-2" style="width: 80%;">
-    <div class="card" style="width: 18rem;">
-      <div class="card-body">
-        <h3><%= @sprint.name %></h3>
-        <h5><%= @sprint.goal %></h5>
-        <p><%= @sprint.start_time.strftime("%m/%d/%Y %I:%M%p") %></p>
-        <p><%= @sprint.duration %></p>
+    <% @sprints.each do |sprint| %>
+    <div class="row">
+      <div class="col-3">
+        <div class="card" style="width: 18rem;">
+          <div class="card-body">
+            <h3><%= sprint.name %></h3>
+            <h5><%= sprint.goal %></h5>
+            <p><%= sprint.start_time.strftime("%m/%d/%Y %I:%M%p") %></p>
+            <%# <p>= sprint.duration</p> %>
+          </div>
+        </div>
       </div>
     </div>
+    <% end %>
 
   </div>
 </div>

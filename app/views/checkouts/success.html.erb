@@ -1,0 +1,14 @@
+<div class="container">
+  <h1>Success! </h1>
+
+  <p>You just bought premium reports</p>
+
+  <h2>Your total was <%= @session.amount_total.to_f/100 %>
+  <br>
+  <h3>
+  <% @line_items.each do |item| %>
+    <h3><%= item.description %></h3>
+    <br>
+    <p><%= item.price.unit_amount.to_f/100 %></p>
+  <% end %>
+</div>
