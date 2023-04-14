@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
   before_action :find_by_slug, only: %i[show edit update destroy remove_users report cancel_subscription]
   before_action :check_subsciption, only: %i[report]
+
   def index
     @projects = Project.all
   end
@@ -45,9 +46,10 @@ class ProjectsController < ApplicationController
   end
 
   def destroy
-    # debugger
+    @project.board.sprints.each do |s|
+      s.tickets.each { |t| t.destroy }
+    end
     @project.destroy
-    # redirect_to projects_path
   end
 
 
