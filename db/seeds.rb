@@ -12,5 +12,6 @@
 end
 
 User.all.each do |user|
+  user.confirm
   user.add_role :manager
 end
