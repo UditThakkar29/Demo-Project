@@ -8,7 +8,7 @@
 
 
 1.upto(5) do |i|
-  User.create(:email => "user#{i}@yopmail.com",username: "user#{i}}", :password => "password#{i}",:password_confirmation => "password#{i}",)
+  User.create(:email => "user#{i}@yopmail.com",username: "user#{i}}", :password => "password#{i}",:password_confirmation => "password#{i}")
 end
 
 User.all.each do |user|
