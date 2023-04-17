@@ -2,6 +2,7 @@
 
 # Controller for tickets
 class TicketsController < ApplicationController
+  before_action :authenticate_user!
   before_action :find_by_slug, only: %i[show new create edit ticket_history update]
   before_action :find_by_slug_aasm, only: %i[start test done]
 

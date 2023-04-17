@@ -96,6 +96,6 @@ end
 
 RSpec.configure do |config|
   config.before(:each, type: :request) do
-    host! 'localhost:3000/'
+    host! 'localhost:3000'
   end
 end

@@ -9,6 +9,7 @@ class Sprint < ApplicationRecord
   # validations
   # validates :name, presence: true, uniqueness: true
   validates :board_id, uniqueness: { scope: :name }
+  validates :name, presence: true
   validates :start_time, presence: true
   validates :goal, presence: true
 
