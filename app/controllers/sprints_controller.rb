@@ -3,7 +3,7 @@
 # Controller for sprint
 class SprintsController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_by_slug, only: %i[show new create end_sprint backlog_tickets sprint_report]
+  before_action :find_by_slug, expect: %i[select_sprint]
   before_action :can_be_ended, only: %i[end_sprint]
   before_action :find_sprints, only: %i[select_sprint]
 
@@ -65,7 +65,7 @@ class SprintsController < ApplicationController
 
   def find_by_slug
     @project = current_user.projects.friendly.find_by_slug(params[:project_slug])
-    @board = @project.board
+    @board = @project&.board
     @sprint = Sprint.friendly.find_by_slug(params[:slug])
   end
 

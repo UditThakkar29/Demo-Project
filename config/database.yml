@@ -90,6 +90,7 @@ test:
 #
 production:
   <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
   database: devise_test2
   username: devise
   password: <%= ENV['DEVISE_DATABASE_PASSWORD'] %>
